@@ -1,16 +1,18 @@
 package org.academia.GameObjects.Movable;
 
 import org.academia.Direction;
-import org.academia.GameObjects.GameObjects;
+import org.academia.GameObjects.GameObject;
 import org.academia.GameObjects.Weapon;
+import org.academia.GameObjects.WeaponType;
 import org.academia.Position;
 
 /**
  * Created by codecadet on 14/11/16.
  */
-public class Player extends GameObjects implements Movable {
+public class Player extends GameObject implements Movable {
 
     private Weapon weapon;
+    private WeaponType weaponType;
     private Direction direction;
     private Position position;
     private int health;
@@ -31,11 +33,37 @@ public class Player extends GameObjects implements Movable {
 
     }
 
-    public void useWeapon(Player opponent){
-
-
-
+    public void getWeapon() {
+        hasWeapon = true;
     }
+
+    public Projectile useWeapon(){
+
+        WeaponType type;
+        int damage;
+        Projectile newProjectile = null;
+
+        switch (type){
+            case BOW:
+                Projectile bowProjectile = new Projectile(1, 5);
+                break;
+
+            case AXE:
+                Projectile axeProjectile1 = new Projectile(3, 1);
+                //TODO create projectiles around the player
+                break;
+
+            case FLAMETRHOWER:
+                Projectile flameProjectile = new Projectile(5, 7);
+                break;
+
+            default:
+                System.out.println("Something really bad happened!");
+        }
+
+        return newProjectile;
+    }
+
 
     public void takeDamage(int damage){
         health -= damage;
@@ -53,4 +81,9 @@ public class Player extends GameObjects implements Movable {
 
 
     }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
 }

@@ -11,7 +11,13 @@ public class Projectile implements Movable {
 
     private Position position;
     private Direction direction;
+    private int damage;
     private int range;
+
+    public Projectile(int damage, int range) {
+        this.damage = damage;
+        this.range = range;
+    }
 
     @Override
     public void move(){
