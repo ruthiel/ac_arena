@@ -7,6 +7,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Wall;
+import org.academiadecodigo.acarena.GameObjects.Weapon;
 
 import java.io.IOException;
 
@@ -26,22 +27,20 @@ public class Field {
         this.cols = cols;
         gameObjects = new GameObject[cols][rows];
         populateFieldWithWalls();
+        populateFieldWithWeapons();
 
     }
 
     private void populateFieldWithWalls() {
-
-//        int col = 0;
-//        int row = 0;
 
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (i == 0) {
                     gameObjects[j][i] = new Wall();
-                } else if (j == cols-1) {
+                } else if (j == cols - 1) {
                     gameObjects[j][i] = new Wall();
-                } else if (i == rows-1) {
+                } else if (i == rows - 1) {
                     gameObjects[j][i] = new Wall();
                 } else if (j == 0) {
                     gameObjects[j][i] = new Wall();
@@ -50,19 +49,36 @@ public class Field {
         }
     }
 
+
+    private void populateFieldWithWeapons(){
+
+        int tempNum = (int) (Math.random()*10);
+
+        for (int i = 1; i < rows ; i++) {
+            for (int j = 1; j < cols ; j++) {
+                if(tempNum < 2){
+                    gameObjects[j][i] = new Weapon();
+                }
+
+            }
+
+        }
+
+
+    }
     public void toStrange() {
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 if (gameObjects[i][j] instanceof Wall) {
                     System.out.println(gameObjects[i][j]);
                 }
+                if (gameObjects[i][j] instanceof Weapon){
+                    System.out.println("im a weapon @" + gameObjects[i][j]);
+                }
             }
 
         }
     }
-
-
-
 
 
     public int getCols() {

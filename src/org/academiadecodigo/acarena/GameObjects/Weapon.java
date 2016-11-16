@@ -7,8 +7,20 @@ import org.academiadecodigo.acarena.Position;
  */
 public class Weapon extends GameObject {
 
+    private int col;
+    private int row;
     private Position position;
     private boolean used;
+
+
+    public Weapon() {
+    }
+
+    public Weapon(int col, int row) {
+        this.col = col;
+        this.row = row;
+    }
+
 
     // TODO: 14/11/16 implement ammo for weapons
 

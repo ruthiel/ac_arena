@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        Field field = new Field(3,3);
+        Field field = new Field(10,10);
         field.init();
         //Player player = new Player(field);
         field.toStrange();

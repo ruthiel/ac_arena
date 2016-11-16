@@ -9,7 +9,6 @@ public class Boss extends GameObject implements Movable {
 
 
 
-
     @Override
     public void move() {
 

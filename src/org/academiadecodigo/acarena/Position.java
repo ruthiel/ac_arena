@@ -6,6 +6,7 @@ package org.academiadecodigo.acarena;
 public class Position {
     private int col;
     private int row;
+    private final int distance = 1;
 
     private Field field;
 
