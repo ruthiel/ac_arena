@@ -1,4 +1,4 @@
-package org.academia.GameObjects.Movable;
+package org.academiadecodigo.acarena.GameObjects.Movable;
 
 /**
  * Created by codecadet on 14/11/16.

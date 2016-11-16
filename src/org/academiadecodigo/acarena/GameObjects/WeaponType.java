@@ -1,4 +1,4 @@
-package org.academia.GameObjects;
+package org.academiadecodigo.acarena.GameObjects;
 
 /**
  * Created by codecadet on 14/11/16.

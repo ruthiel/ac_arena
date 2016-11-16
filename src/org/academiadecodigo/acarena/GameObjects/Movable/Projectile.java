@@ -1,8 +1,7 @@
-package org.academia.GameObjects.Movable;
+package org.academiadecodigo.acarena.GameObjects.Movable;
 
-import org.academia.Direction;
-import org.academia.GameObjects.Movable.Movable;
-import org.academia.Position;
+import org.academiadecodigo.acarena.Direction;
+import org.academiadecodigo.acarena.Position;
 
 /**
  * Created by codecadet on 14/11/16.

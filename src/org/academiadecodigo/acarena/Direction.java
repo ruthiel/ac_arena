@@ -1,4 +1,4 @@
-package org.academia;
+package org.academiadecodigo.acarena;
 
 /**
  * Created by codecadet on 14/11/16.

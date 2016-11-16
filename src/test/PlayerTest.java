@@ -1,19 +1,21 @@
-package org.academia;
+package test;
 
 import com.googlecode.lanterna.input.*;
+import org.academiadecodigo.acarena.Field;
+import org.academiadecodigo.acarena.Position;
 
 import java.io.IOException;
 
 /**
  * Created by codecadet on 14/11/16.
  */
-public class Player {
+public class PlayerTest {
 
     private Position pos;
     private Field field;
 
 
-    public Player( Field field) throws IOException {
+    public PlayerTest(Field field) throws IOException {
         this.field = field;
         this.pos = new Position(0, 0, field);
         KeyStroke keyStroke = null;
@@ -66,7 +68,7 @@ public class Player {
     }
 
     // testing shit bros!!!!
-    public static void main(String[] args) {
+   // public static void main(String[] args) {
 
         /*terminal.setBackgroundColor(new TextColor.RGB(255,0,0));
         terminal.setForegroundColor(new TextColor.RGB(255,255,0));*/
@@ -87,7 +89,7 @@ public class Player {
         gui.addWindowAndWait(window);
 
         j.setPosition(new TerminalPosition(10, 10));*/
-    }
+//    }
 
 }
 

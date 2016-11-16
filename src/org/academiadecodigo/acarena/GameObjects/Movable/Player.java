@@ -1,10 +1,11 @@
-package org.academia.GameObjects.Movable;
+package org.academiadecodigo.acarena.GameObjects.Movable;
 
-import org.academia.Direction;
-import org.academia.GameObjects.GameObject;
-import org.academia.GameObjects.Weapon;
-import org.academia.GameObjects.WeaponType;
-import org.academia.Position;
+import org.academiadecodigo.acarena.Direction;
+import org.academiadecodigo.acarena.Field;
+import org.academiadecodigo.acarena.GameObjects.GameObject;
+import org.academiadecodigo.acarena.GameObjects.Weapon;
+import org.academiadecodigo.acarena.GameObjects.WeaponType;
+import org.academiadecodigo.acarena.Position;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -18,9 +19,10 @@ public class Player extends GameObject implements Movable {
     private int health;
     private boolean isDead;
     private boolean hasWeapon;
+    private Field field;
 
-
-    public Player() {
+    public Player(Field field) {
+        this.field = field;
         setHealth(100);
         setPosition();
 
@@ -37,13 +39,12 @@ public class Player extends GameObject implements Movable {
         hasWeapon = true;
     }
 
-    public Projectile useWeapon(){
+    public Projectile useWeapon(WeaponType weaponType){
 
-        WeaponType type;
         int damage;
         Projectile newProjectile = null;
 
-        switch (type){
+        switch (weaponType){
             case BOW:
                 Projectile bowProjectile = new Projectile(1, 5);
                 break;

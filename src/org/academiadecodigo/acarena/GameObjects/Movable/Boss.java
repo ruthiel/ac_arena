@@ -1,6 +1,6 @@
-package org.academia.GameObjects.Movable;
+package org.academiadecodigo.acarena.GameObjects.Movable;
 
-import org.academia.GameObjects.GameObject;
+import org.academiadecodigo.acarena.GameObjects.GameObject;
 
 /**
  * Created by codecadet on 14/11/16.
