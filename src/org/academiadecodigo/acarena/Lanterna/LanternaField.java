@@ -1,22 +1,27 @@
 package org.academiadecodigo.acarena.Lanterna;
 
 
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import org.academiadecodigo.acarena.Field;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Wall;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 import java.io.IOException;
 
 /**
  * Created by codecadet on 14/11/16.
  */
-public class LanternaField {
+public class LanternaField implements Field {
     public Screen screen;
     private int cols;
     private int rows;
-    private Terminal terminal;
     private GameObject[][] gameObjects;
 
 
@@ -64,19 +69,6 @@ public class LanternaField {
 
 
     }
-//    public void toStrange() {
-//        for (int i = 0; i < cols; i++) {
-//            for (int j = 0; j < rows; j++) {
-//                if (gameObjects[i][j] instanceof Wall) {
-//                    System.out.println(gameObjects[i][j]);
-//                }
-//                if (gameObjects[i][j] instanceof Weapon){
-//                    System.out.println("im a weapon @" + gameObjects[i][j]);
-//                }
-//            }
-//
-//        }
-//    }
 
 
     public int getCols() {
@@ -87,26 +79,34 @@ public class LanternaField {
         return rows;
     }
 
-    public Terminal getTerminal() {
-        return terminal;
-    }
+    @Override
+    public FieldPosition makeFieldPosition() { return new LanternaGridPosition(this);}
+
+    @Override
+    public FieldPosition makeFieldPosition(int col, int row) {return new LanternaGridPosition(col ,row ,this);}
+
 
     public void init() throws IOException {
 
-//        terminal = new DefaultTerminalFactory().createTerminal();
-//
-//
-//        // create the GUI
-//        screen = new TerminalScreen(terminal);
-//
-//
-//        // set the grid size
-//        //terminal.setCursorVisible(false); // Not Working
-//        screen.getTerminalSize().withColumns(cols);
-//        screen.getTerminalSize().withRows(rows);
-//
-//        // display the grid
-//        screen.startScreen();
+        Terminal terminal = new DefaultTerminalFactory().createTerminal();
+        Screen screen = new TerminalScreen(terminal);
+        screen.startScreen();
+
+        // Create panel to hold components
+        Panel panel = new Panel();
+
+
+        // Create panel to hold components
+        panel.setLayoutManager(new GridLayout(10));
+
+
+        // Create window to hold the panel
+        BasicWindow window = new BasicWindow();
+        window.setComponent(panel);
+
+        // Create gui and start gui
+        MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+        gui.addWindowAndWait(window);
     }
 
     public Screen getScreen() {

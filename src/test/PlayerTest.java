@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.input.*;
 import com.googlecode.lanterna.screen.Screen;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
+import org.academiadecodigo.acarena.Lanterna.LanternaGridPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class PlayerTest {
 
     public PlayerTest(LanternaField lanternaField, Screen screen) throws IOException {
         this.lanternaField = lanternaField;
-        this.pos = new AbstractFieldPosition(0, 0, lanternaField);
+        this.pos = new LanternaGridPosition(0, 0, lanternaField);
         KeyStroke keyStroke = null;
        /* Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(10));

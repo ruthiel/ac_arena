@@ -25,7 +25,7 @@ public abstract class AbstractFieldPosition implements FieldPosition {
         show();
     }
     public void draw(){
-        lanternaField.getTerminal();
+        lanternaField.getScreen();
     }
 
 
