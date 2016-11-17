@@ -36,7 +36,6 @@ public class Client {
         }
         while (true) {
 
-
             String message = keyboardInput.next();
 
             sendBuffer = message.getBytes();
