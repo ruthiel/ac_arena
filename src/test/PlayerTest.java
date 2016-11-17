@@ -3,9 +3,8 @@ package test;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.input.*;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.Terminal;
-import org.academiadecodigo.acarena.Field;
-import org.academiadecodigo.acarena.Position;
+import org.academiadecodigo.acarena.Lanterna.LanternaField;
+import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 import java.io.IOException;
 
@@ -14,15 +13,15 @@ import java.io.IOException;
  */
 public class PlayerTest {
 
-    private Position pos;
-    private Field field;
+    private AbstractFieldPosition pos;
+    private LanternaField lanternaField;
     private Screen screen;
 
 
 
-    public PlayerTest(Field field, Screen screen) throws IOException {
-        this.field = field;
-        this.pos = new Position(0, 0, field);
+    public PlayerTest(LanternaField lanternaField, Screen screen) throws IOException {
+        this.lanternaField = lanternaField;
+        this.pos = new AbstractFieldPosition(0, 0, lanternaField);
         KeyStroke keyStroke = null;
        /* Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(10));
@@ -38,7 +37,7 @@ public class PlayerTest {
         window.setComponent(panel);
 
 
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(field.getScreen(), new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
+        MultiWindowTextGUI gui = new MultiWindowTextGUI(lanternaField.getScreen(), new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
         gui.addWindow(window);*/
 
 

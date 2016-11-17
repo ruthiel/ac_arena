@@ -1,11 +1,11 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
 import org.academiadecodigo.acarena.Direction;
-import org.academiadecodigo.acarena.Field;
+import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.GameObjects.WeaponType;
-import org.academiadecodigo.acarena.Position;
+import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -15,14 +15,14 @@ public class Player extends GameObject implements Movable {
     private Weapon weapon;
     private WeaponType weaponType;
     private Direction direction;
-    private Position position;
+    private AbstractFieldPosition abstractFieldPosition;
     private int health;
     private boolean isDead;
     private boolean hasWeapon;
-    private Field field;
+    private LanternaField lanternaField;
 
-    public Player(Field field) {
-        this.field = field;
+    public Player(LanternaField lanternaField) {
+        this.lanternaField = lanternaField;
         setHealth(100);
         setPosition();
 
@@ -54,7 +54,7 @@ public class Player extends GameObject implements Movable {
                 //TODO create projectiles around the player
                 break;
 
-            case FLAMETRHOWER:
+            case FLAMETHROWER:
                 Projectile flameProjectile = new Projectile(5, 7);
                 break;
 

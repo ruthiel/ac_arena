@@ -1,19 +1,22 @@
-package org.academiadecodigo.acarena;
+package org.academiadecodigo.acarena.position;
+
+import org.academiadecodigo.acarena.Direction;
+import org.academiadecodigo.acarena.Lanterna.LanternaField;
 
 /**
  * Created by codecadet on 14/11/16.
  */
-public class Position {
+public abstract class AbstractFieldPosition implements FieldPosition {
     private int col;
     private int row;
     private final int distance = 1;
 
-    private Field field;
+    private LanternaField lanternaField;
 
-    public Position(int col, int row, Field field) {
+    public AbstractFieldPosition(int col, int row, LanternaField lanternaField) {
         this.col = col;
         this.row = row;
-        this.field = field;
+        this.lanternaField = lanternaField;
     }
 
     public void setPos(int col, int row) {
@@ -22,14 +25,11 @@ public class Position {
         show();
     }
     public void draw(){
-        field.getTerminal();
+        lanternaField.getTerminal();
     }
 
 
     // TODO: 13/11/16 For the players to move and appear on screen
-    private void show() {
-
-    }
 
 
     public void moveInDirection(Direction direction, int distance) {
@@ -66,7 +66,7 @@ public class Position {
      */
     public void moveDown(int dist) {
 
-        int maxRowsDown = dist > field.getRows() - (row + 1) ? field.getRows() - (row + 1) : dist;
+        int maxRowsDown = dist > lanternaField.getRows() - (row + 1) ? lanternaField.getRows() - (row + 1) : dist;
         setPos(col, row + maxRowsDown);
 
     }
@@ -89,14 +89,14 @@ public class Position {
      * @param dist the number of positions to move
      */
     public void moveRight(int dist) {
-        int maxRowsRight = dist > field.getCols() - (col + 1) ? field.getCols() - (col + 1) : dist;
+        int maxRowsRight = dist > lanternaField.getCols() - (col + 1) ? lanternaField.getCols() - (col + 1) : dist;
         setPos(col + maxRowsRight, row);
     }
 
 
     @Override
     public String toString() {
-        return "Position: " + col + ", " + row;
+        return "AbstractFieldPosition: " + col + ", " + row;
 
     }
 

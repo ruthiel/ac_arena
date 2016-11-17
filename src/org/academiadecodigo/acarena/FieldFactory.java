@@ -1,7 +1,7 @@
 package org.academiadecodigo.acarena;
 
 import org.academiadecodigo.acarena.GameObjects.GameObject;
-import org.academiadecodigo.acarena.GameObjects.Wall;
+import org.academiadecodigo.acarena.Lanterna.LanternaField;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -12,7 +12,7 @@ public class FieldFactory {
     private GameObject[][] gameObjects;
     private int rows;
     private int cols;
-    private Field field;
+    private LanternaField lanternaField;
 }
 /*        // TODO: 15/11/16 try to implements a shorter if
         public GameObject[][] createWalls () {
