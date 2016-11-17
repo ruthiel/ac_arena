@@ -25,15 +25,18 @@ public class Client {
         } catch (SocketException e) {
             e.printStackTrace();
         }
+        sendClientData();
+
         try {
             sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, InetAddress.getByName(hostName), portNumber);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         recPacket = new DatagramPacket(recBuffer, recBuffer.length);
+        receiveServerData();
     }
 
-    public void sendPosition() {
+    public void sendClientData() {
         try {
             clientSocket.send(sendPacket);
         } catch (IOException e) {
