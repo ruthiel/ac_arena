@@ -52,7 +52,7 @@ public class Server {
                 sendBuffer = message.getBytes();
 
                 try {
-                        sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, InetAddress.getByName(hostName), portNumber);
+                        sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, InetAddress.getByName(hostName), 9090);
                 } catch (UnknownHostException e) {
                         e.printStackTrace();
                 }
@@ -62,6 +62,11 @@ public class Server {
                         e.printStackTrace();
                 }
 
+                System.out.println(message);
+
         }
 
+        public int getPortNumber() {
+                return portNumber;
+        }
 }
