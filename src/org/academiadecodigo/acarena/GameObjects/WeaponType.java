@@ -7,7 +7,7 @@ public enum WeaponType {
 
     BOW,
     AXE,
-    FLAMETRHOWER;
+    FLAMETHROWER;
 
     private int range;
 

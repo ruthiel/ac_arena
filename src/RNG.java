@@ -1,5 +1,3 @@
-import org.academiadecodigo.acarena.Field;
-
 /**
  * Created by codecadet on 16/11/16.
  */

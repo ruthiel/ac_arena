@@ -1,6 +1,6 @@
 package org.academiadecodigo.acarena.GameObjects;
 
-import org.academiadecodigo.acarena.Position;
+import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -9,7 +9,7 @@ public class Weapon extends GameObject {
 
     private int col;
     private int row;
-    private Position position;
+    private AbstractFieldPosition abstractFieldPosition;
     private boolean used;
 
 
