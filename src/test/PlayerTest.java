@@ -1,6 +1,9 @@
 package test;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.input.*;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.terminal.Terminal;
 import org.academiadecodigo.acarena.Field;
 import org.academiadecodigo.acarena.Position;
 
@@ -13,13 +16,14 @@ public class PlayerTest {
 
     private Position pos;
     private Field field;
+    private Screen screen;
 
 
-    public PlayerTest(Field field) throws IOException {
+
+    public PlayerTest(Field field, Screen screen) throws IOException {
         this.field = field;
         this.pos = new Position(0, 0, field);
         KeyStroke keyStroke = null;
-        field.getTerminal().readInput();
        /* Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(10));
 
@@ -40,25 +44,35 @@ public class PlayerTest {
 
         while (true) {
             System.out.println("im here");
-            keyStroke = field.getTerminal().readInput();
+            keyStroke = screen.readInput();
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
                     pos.moveUp(1);
                     System.out.println("UP UP");
                     System.out.println(pos.toString());
+                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.refresh();
+
+
                     break;
                 case ArrowDown:
                     pos.moveDown(1);
                     System.out.println(pos.toString());
+                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.refresh();
                     break;
                 case ArrowLeft:
                     pos.moveLeft(1);
                     System.out.println(pos.toString());
+                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.refresh();
                     break;
                 case ArrowRight:
                     pos.moveRight(1);
                     System.out.println(pos.toString());
+                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.refresh();
                     break;
                 default:
                     System.out.println("W8iting for Input motherfucker");
