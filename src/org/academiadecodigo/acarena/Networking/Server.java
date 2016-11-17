@@ -11,7 +11,6 @@ public class Server {
 
         private String hostName;
         private int portNumber;
-        Scanner keyboardInput;
         DatagramSocket serverSocket;
         DatagramPacket recPacket;
         DatagramPacket sendPacket;
@@ -21,7 +20,6 @@ public class Server {
         public Server(String hostName, int portNumber) {
                 this.hostName = hostName;
                 this.portNumber = portNumber;
-                keyboardInput = new Scanner(System.in);
 
                 //creation of Socket
                 try {
