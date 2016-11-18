@@ -1,10 +1,11 @@
 package test;
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.*;
 import com.googlecode.lanterna.screen.Screen;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
-import org.academiadecodigo.acarena.Lanterna.LanternaGridPosition;
+import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 import java.io.IOException;
@@ -22,7 +23,8 @@ public class PlayerTest {
 
     public PlayerTest(LanternaField lanternaField, Screen screen) throws IOException {
         this.lanternaField = lanternaField;
-        this.pos = new LanternaGridPosition(0, 0, lanternaField);
+        this.screen = screen;
+        this.pos = new LanternaFieldPosition(0, 0, lanternaField);
         KeyStroke keyStroke = null;
        /* Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(10));
@@ -44,14 +46,16 @@ public class PlayerTest {
 
         while (true) {
             System.out.println("im here");
-            keyStroke = screen.readInput();
+            keyStroke = this.screen.readInput();
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
                     pos.moveUp(1);
                     System.out.println("UP UP");
                     System.out.println(pos.toString());
+
                     screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
                     screen.refresh();
 
 
@@ -60,18 +64,21 @@ public class PlayerTest {
                     pos.moveDown(1);
                     System.out.println(pos.toString());
                     screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
                     screen.refresh();
                     break;
                 case ArrowLeft:
                     pos.moveLeft(1);
                     System.out.println(pos.toString());
                     screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
                     screen.refresh();
                     break;
                 case ArrowRight:
                     pos.moveRight(1);
                     System.out.println(pos.toString());
                     screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
+                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
                     screen.refresh();
                     break;
                 default:

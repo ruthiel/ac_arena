@@ -8,7 +8,7 @@ import org.academiadecodigo.acarena.position.FieldPosition;
 /**
  * A GridPosition implementation for the Lanterna based Grid
  */
-public class LanternaGridPosition extends AbstractFieldPosition {
+public class LanternaFieldPosition extends AbstractFieldPosition {
 
     private Object field;
 
@@ -17,7 +17,7 @@ public class LanternaGridPosition extends AbstractFieldPosition {
      *
      * @param field  the field where the position will live on
      */
-    public LanternaGridPosition(LanternaField field) {
+    public LanternaFieldPosition(LanternaField field) {
 
         super((int) (Math.random() * field.getCols()), (int) (Math.random() * field.getRows()), field);
         show();
@@ -31,7 +31,7 @@ public class LanternaGridPosition extends AbstractFieldPosition {
      * @param row   the  grid position row
      * @param grid  the grid where the position will live on
      */
-    public LanternaGridPosition(int col, int row, LanternaField grid) {
+    public LanternaFieldPosition(int col, int row, LanternaField grid) {
 
         super(col, row, grid);
         show();
@@ -50,7 +50,7 @@ public class LanternaGridPosition extends AbstractFieldPosition {
 
     @Override
     public void show() {
-        ((LanternaField) getField()).show(this);
+       // ((LanternaField) getField()).show(this);
     }
 
     @Override

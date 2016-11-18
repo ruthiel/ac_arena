@@ -1,6 +1,7 @@
 package org.academiadecodigo.acarena.Lanterna;
 
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.screen.Screen;
@@ -80,16 +81,16 @@ public class LanternaField implements Field {
     }
 
     @Override
-    public FieldPosition makeFieldPosition() { return new LanternaGridPosition(this);}
+    public FieldPosition makeFieldPosition() { return new LanternaFieldPosition(this);}
 
     @Override
-    public FieldPosition makeFieldPosition(int col, int row) {return new LanternaGridPosition(col ,row ,this);}
+    public FieldPosition makeFieldPosition(int col, int row) {return new LanternaFieldPosition(col ,row ,this);}
 
 
     public void init() throws IOException {
 
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
+        screen = new TerminalScreen(terminal);
         screen.startScreen();
 
         // Create panel to hold components
@@ -97,16 +98,24 @@ public class LanternaField implements Field {
 
 
         // Create panel to hold components
-        panel.setLayoutManager(new GridLayout(10));
+        panel.setLayoutManager(new GridLayout(cols));
 
 
         // Create window to hold the panel
         BasicWindow window = new BasicWindow();
         window.setComponent(panel);
 
+        for (int i = 0; i < 100; i++) {
+            panel.addComponent(new EmptySpace(new TerminalSize(0,0)).withBorder(Borders.singleLine()));
+
+        }
+
         // Create gui and start gui
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+        MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
+        // need to check this!!!
         gui.addWindowAndWait(window);
+        gui.addListener((TextGUI.Listener) screen.readInput());
+        gui.handleInput(screen.readInput());
     }
 
     public Screen getScreen() {
@@ -114,9 +123,9 @@ public class LanternaField implements Field {
     }
 
 
-    public void show(LanternaGridPosition lanternaGridPosition) {
+    public void show(LanternaFieldPosition lanternaFieldPosition) {
     }
 
-    public void hide(LanternaGridPosition lanternaGridPosition) {
+    public void hide(LanternaFieldPosition lanternaFieldPosition) {
     }
 }
