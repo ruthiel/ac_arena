@@ -2,7 +2,7 @@ package org.academiadecodigo.acarena.GameObjects.Movable;
 
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
-import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -10,7 +10,7 @@ import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 public class Boss extends GameObject implements Movable {
 
     private Direction direction;
-    private AbstractFieldPosition position;
+    private FieldPosition position;
     private int health;
     private boolean isDead;
 
@@ -19,7 +19,7 @@ public class Boss extends GameObject implements Movable {
     private final int RANGE = 2;
 
 
-    public Boss(AbstractFieldPosition position) {
+    public Boss(FieldPosition position) {
         super(position);
         setHealth(HEALTH);
     }
@@ -28,7 +28,18 @@ public class Boss extends GameObject implements Movable {
     public void move() {
 
         //DO THIS
+        move(chooseDirection(), 1);
 
+    }
+
+    public Direction chooseDirection(){
+
+        Direction newDirection = direction;
+
+        if(Math.random() > ((double) 2) / 10){
+            newDirection = Direction.values()[(int)(Math.random()*Direction.values().length)];
+        }
+        return newDirection;
     }
 
     public void setHealth(int health) {this.health = health;}

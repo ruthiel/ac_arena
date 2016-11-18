@@ -5,7 +5,7 @@ import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.GameObjects.WeaponType;
-import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -15,21 +15,15 @@ public class Player extends GameObject implements Movable {
     private Weapon weapon;
     private WeaponType weaponType;
     private Direction direction;
-    private AbstractFieldPosition abstractFieldPosition;
+    private FieldPosition abstractFieldPosition;
     private int health;
     private boolean isDead;
     private boolean hasWeapon;
     private LanternaField lanternaField;
 
-//    public Player(LanternaField lanternaField) {
-//        this.lanternaField = lanternaField;
-//        setHealth(100);
-//        setPosition();
-//    }
-
     private final int HEALTH = 100;
 
-    public Player(AbstractFieldPosition position) {
+    public Player(FieldPosition position) {
         super(position);
         setHealth(HEALTH);
     }
@@ -37,6 +31,7 @@ public class Player extends GameObject implements Movable {
     @Override
     public void move(){
 
+        move(direction, 1);
     //DO THIS
 
     }
