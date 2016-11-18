@@ -5,15 +5,9 @@ package org.academiadecodigo.acarena.GameObjects;
  */
 public enum WeaponType {
 
-<<<<<<< HEAD
-    BOW,
-    AXE,
-    FLAMETHROWER;
-=======
     BOW (8, 4),
     AXE (2, 8),
     FLAMETRHOWER (10, 10);
->>>>>>> gamelogic
 
     private int range;
     private int damage;

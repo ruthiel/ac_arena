@@ -7,14 +7,9 @@ import org.academiadecodigo.acarena.position.AbstractFieldPosition;
  */
 public class Wall extends GameObject {
 
-<<<<<<< HEAD
-    private AbstractFieldPosition abstractFieldPosition;
 
     public Wall(AbstractFieldPosition abstractFieldPosition) {
-        this.abstractFieldPosition = abstractFieldPosition;
-=======
-    public Wall(Position position) {
-        super(position);
->>>>>>> gamelogic
+        super(abstractFieldPosition);
+
     }
 }
