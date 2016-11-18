@@ -2,6 +2,7 @@ package org.academiadecodigo.acarena.Lanterna;
 
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.screen.Screen;
@@ -25,14 +26,12 @@ public class LanternaField implements Field {
     private int rows;
     private GameObject[][] gameObjects;
 
-
     public LanternaField(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
         gameObjects = new GameObject[cols][rows];
         populateFieldWithWalls();
         populateFieldWithWeapons();
-
     }
 
     private void populateFieldWithWalls() {
@@ -81,24 +80,27 @@ public class LanternaField implements Field {
     }
 
     @Override
-    public FieldPosition makeFieldPosition() { return new LanternaFieldPosition(this);}
+    public FieldPosition makeFieldPosition() throws IOException { return new LanternaFieldPosition(this);}
 
     @Override
-    public FieldPosition makeFieldPosition(int col, int row) {return new LanternaFieldPosition(col ,row ,this);}
+    public FieldPosition makeFieldPosition(int col, int row) throws IOException {return new LanternaFieldPosition(col ,row ,this);}
 
 
     public void init() throws IOException {
 
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
         screen = new TerminalScreen(terminal);
+        screen.getTerminalSize().withColumns(cols);
+        screen.getTerminalSize().withRows(rows);
         screen.startScreen();
 
+
         // Create panel to hold components
-        Panel panel = new Panel();
+       /* this.panel = new Panel();
 
 
         // Create panel to hold components
-        panel.setLayoutManager(new GridLayout(cols));
+        panel.setLayoutManager(new GridLayout(cols).setHorizontalSpacing(0).setVerticalSpacing(0));
 
 
         // Create window to hold the panel
@@ -106,16 +108,25 @@ public class LanternaField implements Field {
         window.setComponent(panel);
 
         for (int i = 0; i < 100; i++) {
-            panel.addComponent(new EmptySpace(new TerminalSize(0,0)).withBorder(Borders.singleLine()));
+            panel.addComponent(new EmptySpace(new TerminalSize(2,1)).withBorder(Borders.singleLine()));
+        }*/
 
-        }
 
         // Create gui and start gui
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
-        // need to check this!!!
-        gui.addWindowAndWait(window);
-        gui.addListener((TextGUI.Listener) screen.readInput());
-        gui.handleInput(screen.readInput());
+        /* Thread thGui = new Thread() {
+            public void run() {
+                MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
+                // need to check this!!!
+                gui.addWindowAndWait(window);
+
+            }
+        };
+
+        thGui.start();*/
+
+
+
+
     }
 
     public Screen getScreen() {
@@ -123,9 +134,14 @@ public class LanternaField implements Field {
     }
 
 
-    public void show(LanternaFieldPosition lanternaFieldPosition) {
+    public void show(FieldPosition pos) throws IOException {
+        screen.setCharacter(pos.getCol(),pos.getRow(), new TextCharacter('w',TextColor.ANSI.BLUE,TextColor.ANSI.RED));
+        screen.refresh();
     }
 
-    public void hide(LanternaFieldPosition lanternaFieldPosition) {
+    public void hide(FieldPosition pos) throws IOException {
+        screen.setCharacter(pos.getCol(), pos.getRow(), TextCharacter.DEFAULT_CHARACTER.withCharacter(' '));
+        screen.refresh();
+
     }
 }

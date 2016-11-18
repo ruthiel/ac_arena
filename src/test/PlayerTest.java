@@ -2,12 +2,15 @@ package test;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.input.*;
 import com.googlecode.lanterna.screen.Screen;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -16,15 +19,16 @@ import java.io.IOException;
 public class PlayerTest {
 
     private AbstractFieldPosition pos;
-    private LanternaField lanternaField;
-    private Screen screen;
 
 
 
-    public PlayerTest(LanternaField lanternaField, Screen screen) throws IOException {
-        this.lanternaField = lanternaField;
-        this.screen = screen;
+
+
+
+    public PlayerTest(LanternaField lanternaField) throws IOException {
+
         this.pos = new LanternaFieldPosition(0, 0, lanternaField);
+        pos.show();
         KeyStroke keyStroke = null;
        /* Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(10));
@@ -46,40 +50,37 @@ public class PlayerTest {
 
         while (true) {
             System.out.println("im here");
-            keyStroke = this.screen.readInput();
+            keyStroke = lanternaField.getScreen().readInput();
+
+
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
+                    pos.hide();
                     pos.moveUp(1);
-                    System.out.println("UP UP");
                     System.out.println(pos.toString());
-
-                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
-                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
-                    screen.refresh();
-
-
+                    pos.show();
                     break;
+
                 case ArrowDown:
+                    pos.hide();
                     pos.moveDown(1);
                     System.out.println(pos.toString());
-                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
-                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
-                    screen.refresh();
+                    pos.show();
+
                     break;
                 case ArrowLeft:
+                    pos.hide();
                     pos.moveLeft(1);
                     System.out.println(pos.toString());
-                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
-                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
-                    screen.refresh();
+                    pos.show();
+
                     break;
                 case ArrowRight:
+                    pos.hide();
                     pos.moveRight(1);
                     System.out.println(pos.toString());
-                    screen.setCursorPosition(new TerminalPosition(pos.getCol(),pos.getRow()));
-                    screen.setCharacter(pos.getCol(),pos.getRow(),new TextCharacter('w'));
-                    screen.refresh();
+                    pos.show();
                     break;
                 default:
                     System.out.println("W8iting for Input motherfucker");

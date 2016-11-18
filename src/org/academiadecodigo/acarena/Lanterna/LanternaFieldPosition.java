@@ -1,23 +1,25 @@
 package org.academiadecodigo.acarena.Lanterna;
 
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.FieldColor;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
+
+import java.io.IOException;
 
 /**
  * A GridPosition implementation for the Lanterna based Grid
  */
 public class LanternaFieldPosition extends AbstractFieldPosition {
 
-    private Object field;
-
     /**
      * Construct a new random field position
      *
      * @param field  the field where the position will live on
      */
-    public LanternaFieldPosition(LanternaField field) {
+    public LanternaFieldPosition(LanternaField field) throws IOException {
 
         super((int) (Math.random() * field.getCols()), (int) (Math.random() * field.getRows()), field);
         show();
@@ -29,12 +31,11 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
      *
      * @param col   the grid position column
      * @param row   the  grid position row
-     * @param grid  the grid where the position will live on
+     * @param field  the grid where the position will live on
      */
-    public LanternaFieldPosition(int col, int row, LanternaField grid) {
+    public LanternaFieldPosition(int col, int row, LanternaField field) throws IOException {
 
-        super(col, row, grid);
-        show();
+        super(col, row, field);
 
     }
 
@@ -49,13 +50,17 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
     }
 
     @Override
-    public void show() {
-       // ((LanternaField) getField()).show(this);
+    public void show() throws IOException {
+        ((LanternaField)getField()).getScreen().setCharacter(getCol(),getRow(), new TextCharacter('w', TextColor.ANSI.BLUE,TextColor.ANSI.RED));
+        ((LanternaField)getField()).getScreen().refresh();
     }
 
+
     @Override
-    public void hide() {
-        ((LanternaField) getField()).hide(this);
+    public void hide() throws IOException {
+        ((LanternaField)getField()).getScreen().setCharacter(getCol(),getRow(), new TextCharacter(' '));
+
+
     }
 
     @Override
@@ -64,7 +69,7 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
     }
 
     @Override
-    public void moveInDirection(Direction direction, int distance) {
+    public void moveInDirection(Direction direction, int distance) throws IOException {
 
         hide();
         super.moveInDirection(direction, distance);
@@ -72,7 +77,4 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
 
     }
 
-    public Object getField() {
-        return field;
-    }
 }

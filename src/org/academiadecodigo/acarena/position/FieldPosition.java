@@ -4,6 +4,8 @@ package org.academiadecodigo.acarena.position;
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.FieldColor;
 
+import java.io.IOException;
+
 /**
  * A position on the grid that is capable of moving around
  */
@@ -48,12 +50,12 @@ public interface FieldPosition {
     /**
      * Displays the position in the grid
      */
-    public void show();
+    public void show() throws IOException;
 
     /**
      * Hides the position in the grid
      */
-    public void hide();
+    public void hide() throws IOException;
 
     /**
      * Moves this grid position towards a specified direction
@@ -61,7 +63,7 @@ public interface FieldPosition {
      * @param direction the direction to move to
      * @param distance  the number of positions to move
      */
-    public void moveInDirection(Direction direction, int distance);
+    public void moveInDirection(Direction direction, int distance) throws IOException;
 
     /**
      * Tests equality with another position

@@ -30,7 +30,7 @@ public interface Field {
      *
      * @return the new grid position
      */
-    public FieldPosition makeFieldPosition();
+    public FieldPosition makeFieldPosition() throws IOException;
 
     /**
      * Creates a a grid position in a specific column and row
@@ -39,6 +39,6 @@ public interface Field {
      * @param row   the position row
      * @return the new grid position
      */
-    public FieldPosition makeFieldPosition(int col, int row);
+    public FieldPosition makeFieldPosition(int col, int row) throws IOException;
 
 }
