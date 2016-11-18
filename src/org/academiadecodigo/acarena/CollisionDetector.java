@@ -2,28 +2,29 @@ package org.academiadecodigo.acarena;
 
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Movable.Player;
-import org.academiadecodigo.acarena.position.FieldPosition;
+import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 /**
  * Created by codecadet on 17/11/16.
  */
 public class CollisionDetector {
 
-    private static GameObject[] objects;
+    private GameObject[] objects;
 
-    private CollisionDetector(GameObject[] objects) {
+    public CollisionDetector(GameObject[] objects) {
         this.objects = objects;
     }
 
-    public boolean hasCollided(FieldPosition position){
+    public boolean hasCollided(AbstractFieldPosition position){
 
         for (GameObject object : objects){
-            if (object.getPosition() != position && object.getPosition().equals(position)){
+            if (object.getPosition()!= position && object.getPosition().equals(position)){
                 return true;
             }
         }
         return false;
     }
+
 
     //Checks for collisions with player
     //
@@ -41,15 +42,6 @@ public class CollisionDetector {
             }
 
         }
-    }
-
-    private static class CollisionDetectorHolder{
-
-        private static final CollisionDetector collisionDetector = new CollisionDetector(objects);
-    }
-
-    public static CollisionDetector getCollisionDetector(){
-        return CollisionDetectorHolder.collisionDetector;
     }
 
 }
