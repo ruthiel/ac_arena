@@ -5,6 +5,8 @@ import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.position.FieldPosition;
 import org.academiadecodigo.acarena.GameObjects.WeaponType;
 
+import java.io.IOException;
+
 /**
  * Created by codecadet on 14/11/16.
  */
@@ -26,7 +28,11 @@ public class Projectile implements Movable {
     public void move(){
 
         //Projectile moves in this.direction for this.range
-        getInitPosition().moveInDirection(direction, range);
+        try {
+            getInitPosition().moveInDirection(direction, range);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
     public void hit(){
