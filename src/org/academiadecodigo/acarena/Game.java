@@ -13,16 +13,13 @@ public class Game {
     private GameServer socketServer;
     private GameClient socketClient;
 
-//    public void init() {
-//        socketClient = new GameClient(this, "localhost");
-//        socketClient.sendData("ping".getBytes());
-//        start();
-//    }
-
     public synchronized void start() {
         socketServer = new GameServer(this);
-        socketClient = new GameClient(this, "localhost");
         socketServer.start();
+    }
+
+    public synchronized void newPlayer() {
+        socketClient = new GameClient(this, "localhost");
         socketClient.start();
         socketClient.sendData("ping".getBytes());
     }
