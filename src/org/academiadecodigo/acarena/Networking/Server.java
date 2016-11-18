@@ -2,7 +2,10 @@ package org.academiadecodigo.acarena.Networking;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Vector;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -16,18 +19,16 @@ public class Server {
         DatagramPacket sendPacket;
         byte[] recBuffer;
         byte[] sendBuffer;
-
-
-
+        private Vector<ClientHandler> container;
+        private int[] arrPorts = {9010, 9020, 9030, 9040, 9050, 9060};
 
         public Server(String hostName, int portNumber) {
                 this.hostName = hostName;
                 this.portNumber = portNumber;
+                container = new Vector<>();
         }
 
         public void start() {
-
-
                 try {
                         serverSocket = new DatagramSocket(portNumber);
                 } catch (SocketException e) {
@@ -45,24 +46,20 @@ public class Server {
                         e.printStackTrace();
                 }
 
-                String message = new String(recBuffer, 0, recPacket.getLength());
-                System.out.println(message);
+//                String message = new String(recBuffer, 0, recPacket.getLength());
+//                System.out.println(message);
+//
+//                sendBuffer = message.getBytes();
 
-                //mudar p bytes
-                sendBuffer = message.getBytes();
+                sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, recPacket.getAddress(), recPacket.getPort());
 
-                try {
-                        sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, InetAddress.getByName(hostName), 9090);
-                } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                }
                 try {
                         serverSocket.send(sendPacket);
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
 
-                System.out.println(message);
+//                System.out.println(message);
 
         }
 

@@ -1,30 +1,24 @@
 package org.academiadecodigo.acarena.GameObjects;
 
-import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.GameObjects.Movable.Projectile;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
  */
 public class Weapon extends GameObject {
 
-    private int col;
-    private int row;
-    private AbstractFieldPosition abstractFieldPosition;
+
     private boolean used;
+    private Projectile projectile;
+    private WeaponType weaponType;
 
-
-    public Weapon() {
+    public Weapon(FieldPosition position, WeaponType weaponType) {
+        super(position);
+        this.weaponType = weaponType;
     }
 
-    public Weapon(int col, int row) {
-        this.col = col;
-        this.row = row;
+    public void setUsed(boolean used) {
+        this.used = used;
     }
-
-
-    // TODO: 14/11/16 implement ammo for weapons
-
-
-
-
 }

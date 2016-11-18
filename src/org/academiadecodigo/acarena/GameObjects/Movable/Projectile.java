@@ -1,26 +1,32 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
+import org.academiadecodigo.acarena.CollisionDetector;
 import org.academiadecodigo.acarena.Direction;
-import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.position.FieldPosition;
+import org.academiadecodigo.acarena.GameObjects.WeaponType;
 
 /**
  * Created by codecadet on 14/11/16.
  */
 public class Projectile implements Movable {
 
-    private AbstractFieldPosition abstractFieldPosition;
+    private FieldPosition initPosition;
     private Direction direction;
     private int damage;
     private int range;
 
-    public Projectile(int damage, int range) {
-        this.damage = damage;
-        this.range = range;
+    public Projectile(WeaponType type, Player player) {
+        damage = type.getDamage();
+        range = type.getRange();
+        initPosition = player.getPosition();
+        direction = player.getDirection();
     }
 
     @Override
     public void move(){
 
+        //Projectile moves in this.direction for this.range
+        getInitPosition().moveInDirection(direction, range);
 
     }
     public void hit(){
@@ -28,4 +34,15 @@ public class Projectile implements Movable {
 
     }
 
+    public FieldPosition getInitPosition() {return initPosition;}
+
+    public Direction getDirection() {return direction;}
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getRange() {
+        return range;
+    }
 }

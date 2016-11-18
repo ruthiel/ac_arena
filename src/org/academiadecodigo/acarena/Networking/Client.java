@@ -16,29 +16,22 @@ public class Client {
     byte[] sendBuffer;
     DatagramPacket recPacket;
     DatagramPacket sendPacket = null;
-    Scanner keyboardInput;
     Server server;
 
     public Client(String hostName, int portNumber) {
         this.hostName = hostName;
         this.portNumber = portNumber;
-
-
-
     }
 
     public void start() {
-        keyboardInput = new Scanner(System.in);
         try {
             clientSocket = new DatagramSocket(portNumber);
         } catch (SocketException e) {
             e.printStackTrace();
         }
+
         while (true) {
 
-            String message = keyboardInput.next();
-
-            sendBuffer = message.getBytes();
             recBuffer = new byte[2048];
 
             try {

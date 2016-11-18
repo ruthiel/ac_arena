@@ -5,7 +5,7 @@ import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.GameObjects.WeaponType;
-import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -15,56 +15,53 @@ public class Player extends GameObject implements Movable {
     private Weapon weapon;
     private WeaponType weaponType;
     private Direction direction;
-    private AbstractFieldPosition abstractFieldPosition;
+    private FieldPosition abstractFieldPosition;
     private int health;
     private boolean isDead;
     private boolean hasWeapon;
     private LanternaField lanternaField;
 
-    public Player(LanternaField lanternaField) {
-        this.lanternaField = lanternaField;
-        setHealth(100);
-        setPosition();
+    private final int HEALTH = 100;
 
+    public Player(FieldPosition position) {
+        super(position);
+        setHealth(HEALTH);
     }
-
 
     @Override
     public void move(){
 
+        move(direction, 1);
+    //DO THIS
 
     }
+
+    public void useWeapon(WeaponType weaponType){
+
+        if (hasWeapon) {
+            Projectile projectile = new Projectile(weaponType, this);
+            projectile.move();
+            dropWeapon();
+        }
+    }
+
+    public void collision() {
+
+    //ALSO DO THIS
+        //Test collision with walls, boss and players
+
+        //Test collision with Weapons: getWeapon();
+
+    }
+
+
+    public void setDead(boolean dead) {isDead = dead;}
 
     public void getWeapon() {
         hasWeapon = true;
     }
 
-    public Projectile useWeapon(WeaponType weaponType){
-
-        int damage;
-        Projectile newProjectile = null;
-
-        switch (weaponType){
-            case BOW:
-                Projectile bowProjectile = new Projectile(1, 5);
-                break;
-
-            case AXE:
-                Projectile axeProjectile1 = new Projectile(3, 1);
-                //TODO create projectiles around the player
-                break;
-
-            case FLAMETHROWER:
-                Projectile flameProjectile = new Projectile(5, 7);
-                break;
-
-            default:
-                System.out.println("Something really bad happened!");
-        }
-
-        return newProjectile;
-    }
-
+    public void dropWeapon() {hasWeapon = false; }
 
     public void takeDamage(int damage){
         health -= damage;
@@ -78,13 +75,9 @@ public class Player extends GameObject implements Movable {
         this.health = health;
     }
 
-    public void setPosition() {
-
-
-    }
-
     public Direction getDirection() {
         return direction;
     }
+
 
 }

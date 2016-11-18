@@ -1,14 +1,43 @@
 package org.academiadecodigo.acarena.GameObjects;
 
+import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.CollisionDetector;
+import org.academiadecodigo.acarena.Field;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
  * Created by codecadet on 14/11/16.
  */
-public class GameObject {
+abstract public class GameObject {
 
-    AbstractFieldPosition abstractFieldPosition;
 
-    public GameObject() {
+    //This class needs a FieldPosition, a Field and a CollisionDetector
+    private FieldPosition position;
+    private Field field;
+    protected CollisionDetector collisionDetector;
+
+
+    public GameObject(FieldPosition position) {
+        this.position = position;
     }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
+    public FieldPosition getPosition() {
+        return position;
+    }
+
+    public void setCollisionDetector(CollisionDetector collisionDetector) {
+        this.collisionDetector = collisionDetector;
+    }
+
+    public void move(Direction direction, int moves){
+
+        getPosition().moveInDirection(direction, moves);
+
+    }
+
 }
