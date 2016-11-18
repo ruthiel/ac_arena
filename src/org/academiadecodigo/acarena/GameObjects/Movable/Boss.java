@@ -1,19 +1,37 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
+import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
+import org.academiadecodigo.acarena.Position;
 
 /**
  * Created by codecadet on 14/11/16.
  */
 public class Boss extends GameObject implements Movable {
 
+    private Direction direction;
+    private Position position;
+    private int health;
+    private boolean isDead;
 
+    private final int HEALTH = 500;
+    private final int DAMAGE = 50;
+    private final int RANGE = 2;
+
+
+    public Boss(Position position) {
+        super(position);
+        setHealth(HEALTH);
+    }
 
     @Override
     public void move() {
 
-        //TODO boss looks for nearest player, check players position, go after player
-        //
+        //DO THIS
 
     }
+
+    public void setHealth(int health) {this.health = health;}
+
+    public void setDead(boolean dead) {isDead = dead;}
 }
