@@ -8,18 +8,4 @@ import org.academiadecodigo.acarena.GameObjects.Movable.Player;
  */
 public class GameObjectsFactory {
 
-
-
-    public static Player getNewPlayer(Field field){
-
-        Player player = new Player(field.makeFieldPosition())
-
-
-
-        return player;
-    }
-
-
-
-
 }

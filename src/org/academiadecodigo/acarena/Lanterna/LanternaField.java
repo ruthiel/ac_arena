@@ -109,7 +109,6 @@ public class LanternaField implements Field {
             panel.addComponent(new EmptySpace(new TerminalSize(2,1)).withBorder(Borders.singleLine()));
         }*/
 
-
         // Create gui and start gui
         /* Thread thGui = new Thread() {
             public void run() {
@@ -121,9 +120,6 @@ public class LanternaField implements Field {
         };
 
         thGui.start();*/
-
-
-
 
     }
 
