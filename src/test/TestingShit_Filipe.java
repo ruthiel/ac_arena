@@ -11,7 +11,7 @@ public class TestingShit_Filipe {
     public static void main(String[] args) {
 
         Game game = new Game();
-        Player filipe = new Player();
+       // Player filipe = new Player();
 
 
     }

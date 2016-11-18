@@ -1,7 +1,10 @@
 package org.academiadecodigo.acarena.position;
 
 import org.academiadecodigo.acarena.Direction;
-import org.academiadecodigo.acarena.Lanterna.LanternaField;
+import org.academiadecodigo.acarena.Field;
+import org.academiadecodigo.acarena.FieldColor;
+
+import java.io.IOException;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -9,30 +12,43 @@ import org.academiadecodigo.acarena.Lanterna.LanternaField;
 public abstract class AbstractFieldPosition implements FieldPosition {
     private int col;
     private int row;
+    private FieldColor color;
     private final int distance = 1;
+    private Field field;
 
-    private LanternaField lanternaField;
-
-    public AbstractFieldPosition(int col, int row, LanternaField lanternaField) {
+    public AbstractFieldPosition(int col, int row, Field field) {
         this.col = col;
         this.row = row;
-        this.lanternaField = lanternaField;
+        this.field = field;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    @Override
+    public FieldColor getColor() {
+        return color;
+    }
+
+    @Override
+    public void setColor(FieldColor color) {
+        this.color = color;
     }
 
     public void setPos(int col, int row) {
         this.col = col;
         this.row = row;
-        show();
     }
     public void draw(){
-        lanternaField.getScreen();
+
     }
 
 
     // TODO: 13/11/16 For the players to move and appear on screen
 
 
-    public void moveInDirection(Direction direction, int distance) {
+    public void moveInDirection(Direction direction, int distance) throws IOException {
 
         switch (direction) {
 
@@ -66,7 +82,7 @@ public abstract class AbstractFieldPosition implements FieldPosition {
      */
     public void moveDown(int dist) {
 
-        int maxRowsDown = dist > lanternaField.getRows() - (row + 1) ? lanternaField.getRows() - (row + 1) : dist;
+        int maxRowsDown = dist > field.getRows() - (row + 1) ? field.getRows() - (row + 1) : dist;
         setPos(col, row + maxRowsDown);
 
     }
@@ -89,7 +105,7 @@ public abstract class AbstractFieldPosition implements FieldPosition {
      * @param dist the number of positions to move
      */
     public void moveRight(int dist) {
-        int maxRowsRight = dist > lanternaField.getCols() - (col + 1) ? lanternaField.getCols() - (col + 1) : dist;
+        int maxRowsRight = dist > field.getCols() - (col + 1) ? field.getCols() - (col + 1) : dist;
         setPos(col + maxRowsRight, row);
     }
 

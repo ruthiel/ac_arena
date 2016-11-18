@@ -6,6 +6,8 @@ import org.academiadecodigo.acarena.CollisionDetector;
 import org.academiadecodigo.acarena.Field;
 import org.academiadecodigo.acarena.position.FieldPosition;
 
+import java.io.IOException;
+
 /**
  * Created by codecadet on 14/11/16.
  */
@@ -36,7 +38,11 @@ abstract public class GameObject {
 
     public void move(Direction direction, int moves){
 
-        getPosition().moveInDirection(direction, moves);
+        try {
+            getPosition().moveInDirection(direction, moves);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
