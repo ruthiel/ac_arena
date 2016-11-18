@@ -30,45 +30,45 @@ public class LanternaField implements Field {
         this.rows = rows;
         this.cols = cols;
         gameObjects = new GameObject[cols][rows];
-        populateFieldWithWalls();
-        populateFieldWithWeapons();
+//        populateFieldWithWalls();
+//        populateFieldWithWeapons();
 
     }
 
-    private void populateFieldWithWalls() {
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (i == 0) {
-                    gameObjects[j][i] = new Wall();
-                } else if (j == cols - 1) {
-                    gameObjects[j][i] = new Wall();
-                } else if (i == rows - 1) {
-                    gameObjects[j][i] = new Wall();
-                } else if (j == 0) {
-                    gameObjects[j][i] = new Wall();
-                }
-            }
-        }
-    }
-
-
-    private void populateFieldWithWeapons(){
-
-        int tempNum = (int) (Math.random() * 10);
-
-        for (int i = 1; i < rows ; i++) {
-            for (int j = 1; j < cols ; j++) {
-                if(tempNum < 2){
-                    gameObjects[j][i] = new Weapon();
-                }
-
-            }
-
-        }
+//    private void populateFieldWithWalls() {
+//
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//                if (i == 0) {
+//                    gameObjects[j][i] = new Wall(i, j, LanternaField );
+//                } else if (j == cols - 1) {
+//                    gameObjects[j][i] = new Wall();
+//                } else if (i == rows - 1) {
+//                    gameObjects[j][i] = new Wall();
+//                } else if (j == 0) {
+//                    gameObjects[j][i] = new Wall();
+//                }
+//            }
+//        }
+//    }
 
 
-    }
+//    private void populateFieldWithWeapons(){
+//
+//        int tempNum = (int) (Math.random() * 10);
+//
+//        for (int i = 1; i < rows ; i++) {
+//            for (int j = 1; j < cols ; j++) {
+//                if(tempNum < 2){
+//                    gameObjects[j][i] = new Weapon();
+//                }
+//
+//            }
+//
+//        }
+
+
+//    }
 
 
     public int getCols() {

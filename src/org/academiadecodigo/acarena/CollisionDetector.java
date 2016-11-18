@@ -2,6 +2,7 @@ package org.academiadecodigo.acarena;
 
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Movable.Player;
+import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 /**
  * Created by codecadet on 17/11/16.
@@ -14,7 +15,7 @@ public class CollisionDetector {
         this.objects = objects;
     }
 
-    public boolean hasCollided(Position position){
+    public boolean hasCollided(AbstractFieldPosition position){
 
         for (GameObject object : objects){
             if (object.getPosition()!= position && object.getPosition().equals(position)){
