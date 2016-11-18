@@ -1,5 +1,6 @@
 package org.academiadecodigo.acarena.GameObjects;
 
+import org.academiadecodigo.acarena.GameObjects.Movable.Projectile;
 import org.academiadecodigo.acarena.Position;
 
 /**
@@ -7,24 +8,16 @@ import org.academiadecodigo.acarena.Position;
  */
 public class Weapon extends GameObject {
 
-    private int col;
-    private int row;
-    private Position position;
     private boolean used;
+    private Projectile projectile;
+    private WeaponType weaponType;
 
-
-    public Weapon() {
+    public Weapon(Position position, WeaponType weaponType) {
+        super(position);
+        this.weaponType = weaponType;
     }
 
-    public Weapon(int col, int row) {
-        this.col = col;
-        this.row = row;
+    public void setUsed(boolean used) {
+        this.used = used;
     }
-
-
-    // TODO: 14/11/16 implement ammo for weapons
-
-
-
-
 }

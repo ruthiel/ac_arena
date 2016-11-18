@@ -21,50 +21,46 @@ public class Player extends GameObject implements Movable {
     private boolean hasWeapon;
     private Field field;
 
-    public Player(Field field) {
-        this.field = field;
-        setHealth(100);
-        setPosition();
+    private final int HEALTH = 100;
 
+    public Player(Position position) {
+        super(position);
+        setHealth(HEALTH);
     }
-
 
     @Override
     public void move(){
 
+    //DO THIS
 
     }
+
+    public void useWeapon(WeaponType weaponType){
+
+        if (hasWeapon) {
+            Projectile projectile = new Projectile(weaponType, this);
+            projectile.move();
+            dropWeapon();
+        }
+    }
+
+    public void collision() {
+
+    //ALSO DO THIS
+        //Test collision with walls, boss and players
+
+        //Test collision with Weapons: getWeapon();
+
+    }
+
+
+    public void setDead(boolean dead) {isDead = dead;}
 
     public void getWeapon() {
         hasWeapon = true;
     }
 
-    public Projectile useWeapon(WeaponType weaponType){
-
-        int damage;
-        Projectile newProjectile = null;
-
-        switch (weaponType){
-            case BOW:
-                Projectile bowProjectile = new Projectile(1, 5);
-                break;
-
-            case AXE:
-                Projectile axeProjectile1 = new Projectile(3, 1);
-                //TODO create projectiles around the player
-                break;
-
-            case FLAMETRHOWER:
-                Projectile flameProjectile = new Projectile(5, 7);
-                break;
-
-            default:
-                System.out.println("Something really bad happened!");
-        }
-
-        return newProjectile;
-    }
-
+    public void dropWeapon() {hasWeapon = false; }
 
     public void takeDamage(int damage){
         health -= damage;
@@ -78,13 +74,9 @@ public class Player extends GameObject implements Movable {
         this.health = health;
     }
 
-    public void setPosition() {
-
-
-    }
-
     public Direction getDirection() {
         return direction;
     }
+
 
 }

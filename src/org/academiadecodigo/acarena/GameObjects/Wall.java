@@ -7,14 +7,7 @@ import org.academiadecodigo.acarena.Position;
  */
 public class Wall extends GameObject {
 
-    private Position position;
-
     public Wall(Position position) {
-        this.position = position;
+        super(position);
     }
-
-    public Wall(){
-
-    }
-
 }
