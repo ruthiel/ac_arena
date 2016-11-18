@@ -1,33 +1,24 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
 import org.academiadecodigo.acarena.Direction;
-<<<<<<< HEAD
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
-=======
-import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.GameObjects.WeaponType;
-import org.academiadecodigo.acarena.Position;
->>>>>>> gamelogic
 
 /**
  * Created by codecadet on 14/11/16.
  */
 public class Projectile implements Movable {
 
-<<<<<<< HEAD
     private AbstractFieldPosition abstractFieldPosition;
-=======
-    private Position initPosition;
->>>>>>> gamelogic
     private Direction direction;
     private int damage;
     private int range;
 
     public Projectile(WeaponType type, Player player) {
-        this.damage = type.getDamage();
-        this.range = type.getRange();
-        this.initPosition = player.getPosition();
-        this.direction = player.getDirection();
+        damage = type.getDamage();
+        range = type.getRange();
+        initPosition = player.getPosition();
+        direction = player.getDirection();
     }
 
     @Override

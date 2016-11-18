@@ -21,16 +21,15 @@ public class Player extends GameObject implements Movable {
     private boolean hasWeapon;
     private LanternaField lanternaField;
 
-<<<<<<< HEAD
-    public Player(LanternaField lanternaField) {
-        this.lanternaField = lanternaField;
-        setHealth(100);
-        setPosition();
-=======
-    private final int HEALTH = 100;
->>>>>>> gamelogic
+//    public Player(LanternaField lanternaField) {
+//        this.lanternaField = lanternaField;
+//        setHealth(100);
+//        setPosition();
+//    }
 
-    public Player(Position position) {
+    private final int HEALTH = 100;
+
+    public Player(AbstractFieldPosition position) {
         super(position);
         setHealth(HEALTH);
     }
@@ -60,12 +59,6 @@ public class Player extends GameObject implements Movable {
 
     }
 
-<<<<<<< HEAD
-            case FLAMETHROWER:
-                Projectile flameProjectile = new Projectile(5, 7);
-                break;
-=======
->>>>>>> gamelogic
 
     public void setDead(boolean dead) {isDead = dead;}
 
