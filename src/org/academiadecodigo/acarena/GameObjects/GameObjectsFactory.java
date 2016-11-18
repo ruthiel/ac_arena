@@ -10,14 +10,7 @@ public class GameObjectsFactory {
 
 
 
-    public static Player getNewPlayer(Field field){
 
-        Player player = new Player(field.makeFieldPosition())
-
-
-
-        return player;
-    }
 
 
 
