@@ -20,18 +20,8 @@ public class GameClient implements Runnable {
     }
     @Override
     public void run() {
-//        while (true) {
-//            if (packet == null) {
-//                continue;
-//            }
-//            try {
-//                socket.send(packet);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            packet = null;
-//        }
     }
+
     public void sendPacket(DatagramPacket datagramPacket) {
         this.packet = datagramPacket;
         try {
