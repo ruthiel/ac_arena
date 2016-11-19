@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class GameObjectsFactory {
 
-<<<<<<< HEAD
+
     private FieldPosition position;
 
     public void getNewPlayers(Field field) {
@@ -24,12 +24,10 @@ public class GameObjectsFactory {
     }
 
 
-
-
     public void getWalls(Field field) {
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for (int i = 0; i < field.getRows(); i++) {
+            for (int j = 0; j < field.getRows(); j++) {
                 if (i == 0) {
 
                 }
@@ -43,44 +41,42 @@ public class GameObjectsFactory {
     private void populateFieldWithWalls(LanternaField lanternaField) {
 
 
+//        try {
+//            for (int i = 0; i < lanternaField.getRows(); i++) {
+//                for (int j = 0; j < lanternaField.getCols(); j++) {
+//                    if (i == 0) {
+//
+//                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
+//
+//                    } else if (j == cols - 1) {
+//                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(j, i, lanternaField));
+//                    } else if (i == rows - 1) {
+//                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(j, i, lanternaField));
+//                    } else if (j == 0) {
+//                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(j, i, lanternaField));
+//                    }
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
-        try {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (i == 0) {
-
-                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(i,j, lanternaField));
-
-                } else if (j == cols - 1) {
-                    gameObjects[j][i] = new Wall();
-                } else if (i == rows - 1) {
-                    gameObjects[j][i] = new Wall();
-                } else if (j == 0) {
-                    gameObjects[j][i] = new Wall();
-                }
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
+//    private void populateFieldWithWeapons() {
+//
+//        int tempNum = (int) (Math.random() * 10);
+//
+//        for (int i = 1; i < la; i++) {
+//            for (int j = 1; j < cols; j++) {
+//                if (tempNum < 2) {
+//                    gameObjects[j][i] = new Weapon();
+//                }
+//
+//            }
+//
+//        }
+//    }
     }
-
-
-    private void populateFieldWithWeapons() {
-
-        int tempNum = (int) (Math.random() * 10);
-
-        for (int i = 1; i < rows; i++) {
-            for (int j = 1; j < cols; j++) {
-                if (tempNum < 2) {
-                    gameObjects[j][i] = new Weapon();
-                }
-
-            }
-
-        }
-    }
-=======
->>>>>>> 6e5c90839022dc793c26f45bb87e513b997d55c5
 }
 
