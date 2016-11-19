@@ -2,6 +2,7 @@ package org.academiadecodigo.acarena;
 
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Movable.Player;
+import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
@@ -42,6 +43,44 @@ public class CollisionDetector {
 
         }
     }
+
+    public boolean checkCollision(Direction direction, GameObject object){
+
+        FieldPosition tempPosition = adjacentPosition(direction, object);
+
+        if (object instanceof Player){
+
+            for (int i = 0; i < objects.length; i++) {
+                if(!objects[i].getPosition().equals(tempPosition)){
+                    continue;
+                }
+                if(!(objects[i] instanceof Weapon)){
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            for (int i = 0; i < objects.length; i++) {
+                if(!objects[i].getPosition().equals(tempPosition)){
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+
+//    private FieldPosition adjacentPosition(Direction direction, GameObject object) {
+//
+//        FieldPosition position;
+//
+//        switch (direction){
+//            case UP:
+//                position = object.getPosition().setPos(object.getPosition().getCol(), object.getPosition().getRow()-1);
+//                return position;
+//        }
+//
+//    }
 
     private static class CollisionDetectorHolder{
 

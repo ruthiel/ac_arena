@@ -1,6 +1,7 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
 import org.academiadecodigo.acarena.Direction;
+import org.academiadecodigo.acarena.GameObjects.PlayerNumber;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
@@ -13,7 +14,7 @@ import org.academiadecodigo.acarena.position.FieldPosition;
 public class Player extends GameObject implements Movable {
 
     private Weapon weapon;
-    private WeaponType weaponType;
+    private PlayerNumber playerNumber;
     private Direction direction;
     private FieldPosition abstractFieldPosition;
     private int health;
@@ -23,8 +24,9 @@ public class Player extends GameObject implements Movable {
 
     private final int HEALTH = 100;
 
-    public Player(FieldPosition position) {
-        super(position);
+
+    public Player(PlayerNumber playerNumber) {
+        super(playerNumber.setPosition());
         setHealth(HEALTH);
     }
 

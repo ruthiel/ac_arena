@@ -10,13 +10,11 @@ public class GameObjectsFactory {
 
 
 
-    public static Player getNewPlayer(Field field){
+    public void getNewPlayers(Field field){
 
-        Player player = new Player(field.makeFieldPosition())
+        Player player1 = new Player(PlayerNumber.ONE);
+        Player player2 = new Player(PlayerNumber.TWO);
 
-
-
-        return player;
     }
 
 

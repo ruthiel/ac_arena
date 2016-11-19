@@ -3,6 +3,8 @@ package org.academiadecodigo.acarena;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 
+import java.io.IOException;
+
 /**
  * Created by codecadet on 14/11/16.
  */
@@ -25,12 +27,18 @@ public class Game {
         field = FieldFactory.makeField();
         numberOfPlayers = numberPlayers;
 
+        init();
+
     }
 
 
     public void init(){
 
-        field.init();
+        try {
+            field.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         players = new Player[numberOfPlayers];
 
