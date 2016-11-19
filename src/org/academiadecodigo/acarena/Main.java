@@ -16,12 +16,9 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-
-        Game g1 = new Game();
-        g1.start();
-
-        g1.newPlayer();
-
+        LanternaField lanternaField = new LanternaField(10,10);
+        lanternaField.init();
+        PlayerTest playerTest = new PlayerTest(lanternaField);
 
     }
 }

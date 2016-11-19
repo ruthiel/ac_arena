@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class GameObjectsFactory {
 
+<<<<<<< HEAD
     private FieldPosition position;
 
     public void getNewPlayers(Field field) {
@@ -79,5 +80,7 @@ public class GameObjectsFactory {
 
         }
     }
+=======
+>>>>>>> 6e5c90839022dc793c26f45bb87e513b997d55c5
 }
 
