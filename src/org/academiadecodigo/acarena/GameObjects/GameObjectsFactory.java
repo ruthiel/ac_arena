@@ -8,11 +8,4 @@ import org.academiadecodigo.acarena.GameObjects.Movable.Player;
  */
 public class GameObjectsFactory {
 
-
-
-
-
-
-
-
 }

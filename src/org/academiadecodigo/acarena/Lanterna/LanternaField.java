@@ -80,16 +80,10 @@ public class LanternaField implements Field {
     }
 
     @Override
-    public FieldPosition makeFieldPosition() throws IOException {
-            return new LanternaFieldPosition(this);
-
-
-    }
+    public FieldPosition makeFieldPosition() throws IOException { return new LanternaFieldPosition(this);}
 
     @Override
-    public FieldPosition makeFieldPosition(int col, int row) throws IOException {
-            return new LanternaFieldPosition(col ,row ,this);
-    }
+    public FieldPosition makeFieldPosition(int col, int row) throws IOException {return new LanternaFieldPosition(col ,row ,this);}
 
 
     public void init() throws IOException {
