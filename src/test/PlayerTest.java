@@ -20,38 +20,15 @@ public class PlayerTest {
 
     private AbstractFieldPosition pos;
 
-
-
-
-
-
     public PlayerTest(LanternaField lanternaField) throws IOException {
 
         this.pos = new LanternaFieldPosition(0, 0, lanternaField);
         pos.show();
         KeyStroke keyStroke = null;
-       /* Panel panel = new Panel();
-        panel.setLayoutManager(new GridLayout(10));
-
-        Label hello = new Label("Hello");
-
-        panel.addComponent(hello);
-        panel.addComponent(new TextBox("Hello world"));
-
-
-
-        BasicWindow window = new BasicWindow();
-        window.setComponent(panel);
-
-
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(lanternaField.getScreen(), new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
-        gui.addWindow(window);*/
-
 
         while (true) {
             System.out.println("im here");
             keyStroke = lanternaField.getScreen().readInput();
-
 
 
             switch (keyStroke.getKeyType()) {
@@ -60,14 +37,14 @@ public class PlayerTest {
                     pos.moveUp(1);
                     System.out.println(pos.toString());
                     pos.show();
-                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
+                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
                     break;
 
                 case ArrowDown:
                     pos.hide();
                     pos.moveDown(1);
                     System.out.println(pos.toString());
-                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
+                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
                     pos.show();
 
                     break;
@@ -75,7 +52,7 @@ public class PlayerTest {
                     pos.hide();
                     pos.moveLeft(1);
                     System.out.println(pos.toString());
-                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
+                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
                     pos.show();
 
                     break;
@@ -83,7 +60,7 @@ public class PlayerTest {
                     pos.hide();
                     pos.moveRight(1);
                     System.out.println(pos.toString());
-                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
+                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
                     pos.show();
                     break;
                 default:
@@ -92,30 +69,6 @@ public class PlayerTest {
             }
         }
     }
-
-    // testing shit bros!!!!
-   // public static void main(String[] args) {
-
-        /*terminal.setBackgroundColor(new TextColor.RGB(255,0,0));
-        terminal.setForegroundColor(new TextColor.RGB(255,255,0));*/
-
-
-      /*  Panel panel = new Panel();
-        panel.setLayoutManager(new GridLayout(2));
-        Label j = new Label("Eurico");
-        System.out.println(j);
-        panel.addComponent(j);
-        panel.addComponent(new TextBox());
-        panel.addComponent(new Button("Submit"));
-        // Create window to hold the panel
-        BasicWindow window = new BasicWindow();
-        window.setComponent(panel);
-        // Create gui and start gui
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.RED));
-        gui.addWindowAndWait(window);
-
-        j.setPosition(new TerminalPosition(10, 10));*/
-//    }
 
 }
 

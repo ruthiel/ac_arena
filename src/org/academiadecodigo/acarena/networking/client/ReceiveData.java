@@ -22,13 +22,10 @@ public class ReceiveData implements Runnable {
     private Screen screen;
 
 
-
-
     public ReceiveData(Screen screen, DatagramPacket receivePacket, DatagramSocket datagramSocket) {
         this.socket = datagramSocket;
         this.packet = receivePacket;
         this.screen = screen;
-
 
 
     }
@@ -36,10 +33,12 @@ public class ReceiveData implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (packet == null) {
-                continue;
-            }
             try {
+                socket.receive(packet);
+                if (packet == null) {
+                    continue;
+                }
+
                 screen = (Screen) toObject(packet.getData());
             } catch (IOException e) {
                 e.printStackTrace();
