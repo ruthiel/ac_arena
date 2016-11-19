@@ -1,20 +1,15 @@
 package org.academiadecodigo.acarena.Lanterna;
 
 
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.academiadecodigo.acarena.Field;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
-import org.academiadecodigo.acarena.GameObjects.Wall;
-import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.position.FieldPosition;
-
 import java.io.IOException;
 
 /**
