@@ -18,11 +18,19 @@ public class GameObjectsFactory {
     private GameObject[][] gameObjects;
     private LanternaField lanternaField;
 
-    private int cols = lanternaField.getCols();
-    private int rows = lanternaField.getRows();
-    private int middleCol = cols/2;
-    private int middleRow = rows/2;
+    private int cols;
+    private int rows;
+    private int middleCol = cols / 2;
+    private int middleRow = rows / 2;
     private final int WEAPON_ABUNDANCY = 160; //the higher the number, lesser the weapons
+
+    public GameObjectsFactory(LanternaField lanternaField) {
+        this.lanternaField = lanternaField;
+        cols = lanternaField.getCols();
+        rows = lanternaField.getRows();
+        gameObjects = new GameObject[rows][cols];
+    }
+
 
     // NOT RIGHT! Player is created with new Client!!!
     //    public void getNewPlayers(Field field) {
@@ -34,20 +42,37 @@ public class GameObjectsFactory {
 
     //This probably works but game logic is totally compromised with lanterna
 
-    private void populateFieldWithWalls() {
+    private void createPlayers() {
+
+
+    }
+
+
+    public void populateFieldWithWalls() {
 
         try {
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
+            for (int i = 0; i < cols; i++) {
+                for (int j = 0; j < rows; j++) {
+
+                    //Creates walls around field
+
                     if (i == 0) {
-                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
-                    } else if (j == cols - 1) {
-                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(j, i, lanternaField));
-                    } else if (i == rows - 1) {
-                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(j, i, lanternaField));
+                        gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
+                        gameObjects[i][j].getPosition().show();
+                        System.out.println(i+","+j);
                     } else if (j == 0) {
-                        gameObjects[j][i] = new Wall(new LanternaFieldPosition(j, i, lanternaField));
+                        gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
+                        gameObjects[i][j].getPosition().show();
+                        System.out.println(i+","+j);
+                    } else if (j == rows -10) {
+                        gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
+                        gameObjects[i][j].getPosition().show();
+                    } else if (i == cols -10) {
+                        gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
+                        gameObjects[i][j].getPosition().show();
                     }
+
+//                    if (i = )
                 }
             }
         } catch (IOException e) {
@@ -56,9 +81,9 @@ public class GameObjectsFactory {
     }
 
 
-    private void populateFieldWithFuckinWeapons() {
+    public void populateFieldWithFuckinWeapons() {
 
-        int numberOfWeapons = (cols*rows) / WEAPON_ABUNDANCY;
+        int numberOfWeapons = (cols * rows) / WEAPON_ABUNDANCY;
         int prob;
 
         try {
@@ -84,17 +109,17 @@ public class GameObjectsFactory {
         }
     }
 
-    private void createBoss(){
+//    private void createBoss(){
+//
+//        try{
+//        gameObjects[middleRow+1][middleCol+1] = new Boss(new LanternaFieldPosition(middleCol+1, middleRow+1, lanternaField));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
-        try{
-        gameObjects[middleRow+1][middleCol+1] = new Boss(new LanternaFieldPosition(middleCol+1, middleRow+1, lanternaField));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void placeFlag(){
+    private void placeFlag() {
 
         try {
             gameObjects[middleRow][middleCol] = new Flag(new LanternaFieldPosition(middleCol, middleRow, lanternaField));
@@ -104,6 +129,9 @@ public class GameObjectsFactory {
 
     }
 
+    public void setLanternaField(LanternaField lanternaField) {
+        this.lanternaField = lanternaField;
+    }
 }
 
 
