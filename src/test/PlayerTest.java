@@ -60,12 +60,14 @@ public class PlayerTest {
                     pos.moveUp(1);
                     System.out.println(pos.toString());
                     pos.show();
+                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
                     break;
 
                 case ArrowDown:
                     pos.hide();
                     pos.moveDown(1);
                     System.out.println(pos.toString());
+                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
                     pos.show();
 
                     break;
@@ -73,6 +75,7 @@ public class PlayerTest {
                     pos.hide();
                     pos.moveLeft(1);
                     System.out.println(pos.toString());
+                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
                     pos.show();
 
                     break;
@@ -80,6 +83,7 @@ public class PlayerTest {
                     pos.hide();
                     pos.moveRight(1);
                     System.out.println(pos.toString());
+                    System.out.println(((LanternaField)pos.getField()).getScreen().toString().getBytes());
                     pos.show();
                     break;
                 default:
