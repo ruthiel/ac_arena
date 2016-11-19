@@ -1,7 +1,7 @@
 package org.academiadecodigo.acarena;
 
-import org.academiadecodigo.acarena.GameObjects.GameObject;
-import org.academiadecodigo.acarena.GameObjects.Movable.Player;
+import org.academiadecodigo.acarena.networking.GameClient;
+import org.academiadecodigo.acarena.networking.GameServer;
 
 import java.io.IOException;
 
@@ -12,21 +12,10 @@ public class Game {
 
     //TODO Check Collision goes here!
 
-    private Field field;
-    private GameObject[] gameObjects;
-    private Player[] players;
-    private CollisionDetector collisionDetector;
-    private int numberOfPlayers;
+    private GameServer socketServer;
+    private GameClient socketClient;
 
-
-    //This class needs a lot of things...see CarCrash
-
-    public Game(int numberPlayers) {
-
-        collisionDetector = CollisionDetector.getCollisionDetector();
-        field = FieldFactory.makeField();
-        numberOfPlayers = numberPlayers;
-
+<<<<<<< HEAD
         init();
 
     }
@@ -45,7 +34,16 @@ public class Game {
         players[0].setCollisionDetector(collisionDetector);
         players[0].setField(field);
 
+=======
+    public synchronized void start() {
+        socketServer = new GameServer(this);
+        socketServer.start();
     }
 
-
+    public synchronized void newPlayer() {
+        socketClient = new GameClient(this, "localhost");
+        socketClient.start();
+        socketClient.sendData("ping".getBytes());
+>>>>>>> c6f2eda170b4a098391b360d7474c5b8e74fa2d5
+    }
 }

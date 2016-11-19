@@ -4,6 +4,7 @@ import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.position.FieldPosition;
+import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 
 /**
  * Created by codecadet on 17/11/16.
@@ -12,19 +13,20 @@ public class CollisionDetector {
 
     private static GameObject[] objects;
 
-    private CollisionDetector(GameObject[] objects) {
+    public CollisionDetector(GameObject[] objects) {
         this.objects = objects;
     }
 
-    public boolean hasCollided(FieldPosition position){
+    public boolean hasCollided(AbstractFieldPosition position){
 
         for (GameObject object : objects){
-            if (object.getPosition() != position && object.getPosition().equals(position)){
+            if (object.getPosition()!= position && object.getPosition().equals(position)){
                 return true;
             }
         }
         return false;
     }
+
 
     //Checks for collisions with player
     //
@@ -70,17 +72,26 @@ public class CollisionDetector {
         }
     }
 
-//    private FieldPosition adjacentPosition(Direction direction, GameObject object) {
-//
-//        FieldPosition position;
-//
-//        switch (direction){
-//            case UP:
-//                position = object.getPosition().setPos(object.getPosition().getCol(), object.getPosition().getRow()-1);
-//                return position;
-//        }
-//
-//    }
+    private FieldPosition adjacentPosition(Direction direction, GameObject object) {
+
+        FieldPosition position = object.getPosition();
+
+        switch (direction){
+            case UP:
+                position.setPos(position.getCol(), position.getRow()-1);
+                break;
+            case DOWN:
+                position.setPos(position.getCol(), position.getRow()+1);
+                break;
+            case LEFT:
+                position.setPos(position.getCol()-1, position.getRow());
+                break;
+            case RIGHT:
+                position.setPos(position.getCol()+1, position.getRow());
+                break;
+        }
+        return position;
+    }
 
     private static class CollisionDetectorHolder{
 
@@ -90,5 +101,6 @@ public class CollisionDetector {
     public static CollisionDetector getCollisionDetector(){
         return CollisionDetectorHolder.collisionDetector;
     }
+
 
 }

@@ -8,7 +8,7 @@ import org.academiadecodigo.acarena.position.FieldPosition;
 public class Wall extends GameObject {
 
 
-    public Wall(FieldPosition position) {
-        super(position);
+    public Wall(FieldPosition fieldPosition) {
+        super(fieldPosition);
     }
 }

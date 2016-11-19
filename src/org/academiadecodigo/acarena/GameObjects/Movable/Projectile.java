@@ -20,7 +20,7 @@ public class Projectile implements Movable {
     public Projectile(WeaponType type, Player player) {
         damage = type.getDamage();
         range = type.getRange();
-        initPosition = player.getPosition();
+//        initPosition = player.getPosition();
         direction = player.getDirection();
     }
 
