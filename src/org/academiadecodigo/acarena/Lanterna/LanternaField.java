@@ -127,14 +127,14 @@ public class LanternaField implements Field {
     }
 
 
-    public void show(FieldPosition pos) throws IOException {
-        screen.setCharacter(pos.getCol(),pos.getRow(), new TextCharacter('w',TextColor.ANSI.BLUE,TextColor.ANSI.RED));
-        screen.refresh();
-    }
-
-    public void hide(FieldPosition pos) throws IOException {
-        screen.setCharacter(pos.getCol(), pos.getRow(), TextCharacter.DEFAULT_CHARACTER.withCharacter(' '));
-        screen.refresh();
-
-    }
+//    public void show(FieldPosition pos) throws IOException {
+//        screen.setCharacter(pos.getCol(),pos.getRow(), new TextCharacter('w',TextColor.ANSI.BLUE,TextColor.ANSI.RED));
+//        screen.refresh();
+//    }
+//
+//    public void hide(FieldPosition pos) throws IOException {
+//        screen.setCharacter(pos.getCol(), pos.getRow(), TextCharacter.DEFAULT_CHARACTER.withCharacter(' '));
+//        screen.refresh();
+//
+//    }
 }
