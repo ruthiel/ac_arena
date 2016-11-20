@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.FieldColor;
+import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
 
@@ -51,10 +52,21 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
 
     @Override
     public void show() throws IOException {
-        ((LanternaField)getField()).getScreen().setCharacter(getCol(),getRow(), new TextCharacter('w', TextColor.ANSI.BLUE,TextColor.ANSI.RED));
+        ((LanternaField)getField()).getScreen().setCharacter(this.getCol(), this.getRow(), new TextCharacter(' ', TextColor.RGB.Indexed.fromRGB(179,179,179), TextColor.RGB.Indexed.fromRGB(255,255,255)));
         ((LanternaField)getField()).getScreen().refresh();
     }
 
+
+//    public void show() throws IOException {
+//        ((LanternaField)getField()).getScreen().setCharacter(getCol(),getRow(), new TextCharacter('w', TextColor.ANSI.BLUE,TextColor.ANSI.RED));
+//        ((LanternaField)getField()).getScreen().refresh();
+//    }
+
+
+    public void show(GameObject object) throws IOException {
+        ((LanternaField)getField()).getScreen().setCharacter(object.getPosition().getCol(), object.getPosition().getRow(), new TextCharacter(object.getChar()));
+        ((LanternaField)getField()).getScreen().refresh();
+    }
 
     @Override
     public void hide() throws IOException {
