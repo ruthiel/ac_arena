@@ -8,7 +8,7 @@ import java.net.SocketException;
 /**
  * Created by codecadet on 19/11/16.
  */
-public class Server2nd {
+public class Server2nd implements Runnable{
 
         DatagramSocket serverSocket;
 
