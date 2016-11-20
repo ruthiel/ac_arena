@@ -42,8 +42,14 @@ public class Server implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            Iterator<GameClient> iterator = map.keySet().iterator();
+
             if (map.containsValue(String.valueOf(receivePacket.getAddress()))) {
                 System.out.println("Cliente existente");
+                while(iterator.hasNext()) {
+                    iterator.next().sendPacket(receivePacket);
+                }
                 continue;
             }
             String ip = String.valueOf(receivePacket.getAddress());
@@ -59,7 +65,6 @@ public class Server implements Runnable {
             byte[] sendBuffer = new byte[2048];
             System.out.println(map.size());
 
-            Iterator<GameClient> iterator = map.keySet().iterator();
 
             while(iterator.hasNext()) {
                 iterator.next().sendPacket(receivePacket);
