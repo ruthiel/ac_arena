@@ -6,6 +6,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.input.*;
 import com.googlecode.lanterna.screen.Screen;
+import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
@@ -22,8 +23,9 @@ public class PlayerTest {
 
     public PlayerTest(LanternaField lanternaField) throws IOException {
 
+
         this.pos = new LanternaFieldPosition(0, 0, lanternaField);
-        pos.show();
+       // pos.show();
         KeyStroke keyStroke = null;
 
         while (true) {
@@ -36,24 +38,20 @@ public class PlayerTest {
                     pos.hide();
                     pos.moveUp(1);
                     System.out.println(pos.toString());
-                    pos.show();
-                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
                     break;
 
                 case ArrowDown:
                     pos.hide();
                     pos.moveDown(1);
                     System.out.println(pos.toString());
-                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
-                    pos.show();
+                   // pos.show();
 
                     break;
                 case ArrowLeft:
                     pos.hide();
                     pos.moveLeft(1);
                     System.out.println(pos.toString());
-                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
-                    pos.show();
+                   // pos.show();
 
                     break;
                 case ArrowRight:
@@ -61,7 +59,7 @@ public class PlayerTest {
                     pos.moveRight(1);
                     System.out.println(pos.toString());
                     System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
-                    pos.show();
+                   // pos.show();
                     break;
                 default:
                     System.out.println("W8iting for Input motherfucker");

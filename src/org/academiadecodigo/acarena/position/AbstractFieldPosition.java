@@ -2,7 +2,8 @@ package org.academiadecodigo.acarena.position;
 
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.Field;
-import org.academiadecodigo.acarena.FieldColor;
+import org.academiadecodigo.acarena.GameObjects.GameObject;
+import org.academiadecodigo.acarena.TextColor;
 
 import java.io.IOException;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
 public abstract class AbstractFieldPosition implements FieldPosition {
     private int col;
     private int row;
-    private FieldColor color;
+    private TextColor color;
     private final int distance = 1;
     private Field field;
 
@@ -27,12 +28,12 @@ public abstract class AbstractFieldPosition implements FieldPosition {
     }
 
     @Override
-    public FieldColor getColor() {
+    public TextColor getColor() {
         return color;
     }
 
     @Override
-    public void setColor(FieldColor color) {
+    public void setColor(TextColor color) {
         this.color = color;
     }
 
@@ -47,6 +48,8 @@ public abstract class AbstractFieldPosition implements FieldPosition {
 
     // TODO: 13/11/16 For the players to move and appear on screen
 
+    @Override
+    public abstract void show(GameObject object) throws IOException;
 
     public void moveInDirection(Direction direction, int distance) throws IOException {
 

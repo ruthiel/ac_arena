@@ -1,6 +1,6 @@
 package org.academiadecodigo.acarena.GameObjects;
 
-import org.academiadecodigo.acarena.FieldColor;
+import org.academiadecodigo.acarena.TextColor;
 import org.academiadecodigo.acarena.position.FieldPosition;
 
 /**
@@ -8,20 +8,20 @@ import org.academiadecodigo.acarena.position.FieldPosition;
  */
 public enum PlayerNumber {
 
-    ONE (FieldColor.BLUE),
-    TWO (FieldColor.RED),
-    THREE (FieldColor.GREEN),
-    FOUR (FieldColor.YELLOW),
-    FIVE (FieldColor.MAGENTA),
-    SIX (FieldColor.ORANGE);
+    ONE (TextColor.BLUE),
+    TWO (TextColor.RED),
+    THREE (TextColor.GREEN),
+    FOUR (TextColor.YELLOW),
+    FIVE (TextColor.MAGENTA),
+    SIX (TextColor.ORANGE);
 
     //Each Player must have an initial position that is fixed!
     //See other enums for this!
 
-    private FieldColor color;
+    private TextColor color;
     private FieldPosition position;
 
-    PlayerNumber(FieldColor color){
+    PlayerNumber(TextColor color){
         this.position = setPosition();
         this.color = color;
     }

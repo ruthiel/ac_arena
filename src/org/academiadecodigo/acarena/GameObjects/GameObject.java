@@ -1,5 +1,7 @@
 package org.academiadecodigo.acarena.GameObjects;
 
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 import org.academiadecodigo.acarena.CollisionDetector;
@@ -18,6 +20,9 @@ abstract public class GameObject {
     private FieldPosition position;
     private Field field;
     protected CollisionDetector collisionDetector;
+    private TextCharacter character;
+    private String name;
+    private TextColor color;
 
 
     public GameObject(FieldPosition position) {
@@ -46,4 +51,27 @@ abstract public class GameObject {
 
     }
 
+    public TextCharacter getChar() {
+        return character;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(TextColor color) {
+        this.color = color;
+    }
+
+    public void setCharacter(TextCharacter character) {
+        this.character = character;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public TextColor getColor() {
+        return color;
+    }
 }
