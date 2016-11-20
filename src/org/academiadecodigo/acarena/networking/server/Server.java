@@ -66,6 +66,8 @@ public class Server implements Runnable {
             System.out.println(map.size());
 
 
+
+
             while(iterator.hasNext()) {
                 iterator.next().sendPacket(receivePacket);
             }
