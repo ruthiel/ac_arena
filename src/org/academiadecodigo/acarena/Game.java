@@ -1,6 +1,7 @@
 package org.academiadecodigo.acarena;
 
 
+import com.googlecode.lanterna.input.KeyStroke;
 import org.academiadecodigo.acarena.networking.server.GameClient;
 
 
@@ -18,23 +19,29 @@ import java.util.Map;
  */
 public class Game {
 
-    public Game(Map<String, GameClient> map) {
-    }
-
-
     private GameObjectsFactory factory;
     private LanternaField lanternaField;
-    private Map<String, GameClient> map;
+    private Map<String, PlayerTest> playerTestMap;
     private LanternaFieldPosition lanternaFieldPosition;
 
 
-    public Game() throws IOException {
+    public Game(Map<String, GameClient> map) throws IOException {
 
         lanternaField = new LanternaField(50, 50);
-        Thread thread = new Thread(lanternaField);
+        Thread threadField = new Thread(lanternaField);
 
-        thread.start();
-        lanternaField.getPlayer().run();
+        threadField.start();
+
+        for (String key : map.keySet()) {
+            PlayerTest player = new PlayerTest(new LanternaFieldPosition(10,10,lanternaField),lanternaField);
+            playerTestMap.put(key,player);
+            player.repaint();
+        }
+
+
+
+    }
+    public void movePlayer(KeyStroke keyStroke ,String ip){
 
 
     }

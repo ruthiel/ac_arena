@@ -1,6 +1,7 @@
 package org.academiadecodigo.acarena.GameObjects;
 
 import com.googlecode.lanterna.gui2.EmptySpace;
+import com.googlecode.lanterna.gui2.Label;
 import org.academiadecodigo.acarena.GameObjects.Movable.Boss;
 import org.academiadecodigo.acarena.GameObjects.Movable.EmptySlut;
 import org.academiadecodigo.acarena.GameObjects.Movable.Player;
@@ -19,8 +20,8 @@ public class GameObjectsFactory {
 
     private FieldPosition position;
     private GameObject[][] gameObjects;
+    private Label[][] labels;
     private LanternaField lanternaField;
-    private PlayerTest playertest;
 
     private int cols;
     private int rows;
@@ -32,7 +33,8 @@ public class GameObjectsFactory {
         this.lanternaField = lanternaField;
         cols = lanternaField.getCols();
         rows = lanternaField.getRows();
-        gameObjects = new GameObject[rows][cols];
+        labels = lanternaField.getLabels();
+        gameObjects = lanternaField.getGameObjects();
     }
 
 
@@ -51,49 +53,42 @@ public class GameObjectsFactory {
 
     }
 
-    public PlayerTest getPlayertest() {
-        return playertest;
-    }
 
     public void populateFieldWithWalls() {
 
         try {
             for (int i = 0; i < cols; i++) {
                 for (int j = 0; j < rows; j++) {
-                    if(i == 48 && j == 48){
-                        gameObjects[i][j] = new PlayerTest(new LanternaFieldPosition(i, j, lanternaField),lanternaField);
-                        playertest = (PlayerTest) gameObjects[i][j];
-
-                    }
-                    if(i == 49 && j == 49){
-                        return;
-                    }
-
 
                     //Creates walls around field
 
                     if (i == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().create(gameObjects[i][j]);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         System.out.println(i + "," + j );
                         continue;
                     } else if (j == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().create(gameObjects[i][j]);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         System.out.println(i + "," +j);
                         continue;
                     } else if (j == rows - 1) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().create(gameObjects[i][j]);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         continue;
                     } else if (i == cols-1 ) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().create(gameObjects[i][j]);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         continue;
                     }
 
                     gameObjects[i][j] = new EmptySlut(new LanternaFieldPosition(i, j, lanternaField));
                     gameObjects[i][j].getPosition().create(gameObjects[i][j]);
+                    labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
 
 
                 }

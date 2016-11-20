@@ -9,9 +9,19 @@ import java.util.*;
 /**
  * Created by codecadet on 14/11/16.
  */
-public class Server {
-    public static void main(String[] args) {
-        Map<String, GameClient> map = new HashMap<>();
+public class Server implements Runnable {
+     static Map<String,GameClient> map;
+
+
+    public Server() {
+    map = new HashMap<>();
+    }
+    public static Map<String, GameClient> getMap() {
+        return map;
+    }
+
+    @Override
+    public void run() {
         DatagramSocket socket = null;
         int portNumber = 5000;
         try {
@@ -33,7 +43,12 @@ public class Server {
                 continue;
             }
             String upper = String.valueOf(receivePacket.getAddress());
-            GameClient client = new GameClient(receivePacket, socket);
+            GameClient client = null;
+            try {
+                client = new GameClient(receivePacket, socket);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
             Thread clientThread = new Thread(client);
             clientThread.start();
             map.put(upper, client);
@@ -42,6 +57,9 @@ public class Server {
             for (GameClient value : map.values()) {
                 value.sendPacket(receivePacket);
             }
+
         }
     }
+
+
 }

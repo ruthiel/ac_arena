@@ -35,62 +35,60 @@ public class PlayerTest extends GameObject {
 
         setColor(TextColor.ANSI.BLUE);
         setName("  ");
-        this.label = new Label(this.getName()).setBackgroundColor(this.getColor()).setSize(new TerminalSize(1, 1)).setLabelWidth(2);
-        lanternaField.getPanel().addComponent(label);
-
-
-        // pos.show();
 
 
     }
+    public void repaint() throws IOException {
+        lanternaField.repaint(getPosition());
+    }
 
-    public void run() throws IOException {
-        KeyStroke keyStroke = null;
-        while (true) {
-            System.out.println("im here");
-            keyStroke = lanternaField.getScreen().readInput();
+    //    public void run() throws IOException {
+//        KeyStroke keyStroke = null;
+//        while (true) {
+//            System.out.println("im here");
+//            keyStroke = lanternaField.getScreen().readInput();
+    public void playerMove(KeyStroke keyStroke) throws IOException {
 
+        switch (keyStroke.getKeyType()) {
+            case ArrowUp:
+                pos.moveUp(1);
+                label.setPosition(new TerminalPosition((pos.getCol()), pos.getRow()));
+                lanternaField.getGui().updateScreen();
+                System.out.println(pos.toString());
+                break;
 
-            switch (keyStroke.getKeyType()) {
-                case ArrowUp:
-                    pos.moveUp(1);
-                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
-                    lanternaField.getGui().updateScreen();
-                    System.out.println(pos.toString());
-                    break;
+            case ArrowDown:
+                pos.moveDown(1);
+                label.setPosition(new TerminalPosition((pos.getCol()), pos.getRow()));
+                lanternaField.getGui().updateScreen();
+                System.out.println(pos.toString());
+                // pos.show();
 
-                case ArrowDown:
-                    pos.moveDown(1);
-                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
-                    lanternaField.getGui().updateScreen();
-                    System.out.println(pos.toString());
-                    // pos.show();
+                break;
+            case ArrowLeft:
+                System.out.println("player test " + Thread.currentThread().getName());
+                pos.moveLeft(1);
+                label.setPosition(new TerminalPosition((pos.getCol()), pos.getRow()));
+                lanternaField.getGui().updateScreen();
+                System.out.println(pos.toString());
+                // pos.show();
 
-                    break;
-                case ArrowLeft:
-                    pos.moveLeft(1);
-                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
-                    lanternaField.getGui().updateScreen();
-                    System.out.println(pos.toString());
-                    // pos.show();
-
-                    break;
-                case ArrowRight:
-                    pos.moveRight(1);
-
-                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
-                    lanternaField.getGui().updateScreen();
-                    System.out.println(pos.toString());
-                    System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
-                    // pos.show();
-                    break;
-                default:
-                    System.out.println("W8iting for Input motherfucker");
-                    break;
-            }
-
+                break;
+            case ArrowRight:
+                pos.moveRight(1);
+                label.setPosition(new TerminalPosition((pos.getCol()), pos.getRow()));
+                lanternaField.getGui().updateScreen();
+                System.out.println(pos.toString());
+                System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
+                // pos.show();
+                break;
+            default:
+                System.out.println("W8iting for Input motherfucker");
+                break;
         }
     }
+
+
 }
 
 

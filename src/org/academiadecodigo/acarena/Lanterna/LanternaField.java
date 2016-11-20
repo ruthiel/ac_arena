@@ -5,20 +5,17 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.gui2.table.TableHeaderRenderer;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.academiadecodigo.acarena.Field;
-import org.academiadecodigo.acarena.Game;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.GameObjectsFactory;
 import org.academiadecodigo.acarena.position.FieldPosition;
 import test.PlayerTest;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -27,26 +24,36 @@ public class LanternaField implements Field, Runnable {
     public Screen screen;
     private int cols;
     private int rows;
-    private GameObject[][] gameObjects;
-    private Panel panel;
     private Terminal terminal;
+    private GameObject[][] gameObjects;
+    private Label[][] labels;
     private MultiWindowTextGUI gui;
+    private Panel panel;
     private PlayerTest player;
 
     public LanternaField(int rows, int cols) throws IOException {
         this.rows = rows;
         this.cols = cols;
-        gameObjects = new GameObject[cols][rows];
+        this.labels = new Label[cols][rows];
         this.panel = new Panel();
+        gameObjects = new GameObject[cols][rows];
         terminal = new DefaultTerminalFactory().createTerminal();
         screen = new TerminalScreen(terminal);
         screen.startScreen();
+
         GameObjectsFactory factory = new GameObjectsFactory(this);
         factory.populateFieldWithWalls();
         factory.populateFieldWithFuckinWeapons();
-        player = factory.getPlayertest();
 
 
+    }
+
+    public GameObject[][] getGameObjects() {
+        return gameObjects;
+    }
+
+    public Label[][] getLabels() {
+        return labels;
     }
 
     public PlayerTest getPlayer() {
@@ -98,27 +105,47 @@ public class LanternaField implements Field, Runnable {
 
     }
 
+    public void repaint(FieldPosition position) throws IOException {
+
+//        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(),this);
+
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
+                if (labels[j][i].getPosition().getColumn() == position.getCol()
+                        && labels[j][i].getPosition().getRow() == position.getRow()) {
+
+                    labels[j][i].setText("  ");
+                    labels[j][i].setBackgroundColor(TextColor.ANSI.RED);
+                    getGui().updateScreen();
+
+                }
+            }
+        }
+    }
+
+
     @Override
     public void run() {
 
 
-
-            panel.setLayoutManager(new GridLayout(cols).setHorizontalSpacing(0));
-            panel.setPreferredSize(new TerminalSize(100, 100));
-
-
-            // Create window to hold the panel
-            BasicWindow window = new BasicWindow();
-            window.setComponent(panel);
+        panel.setLayoutManager(new GridLayout(cols).setHorizontalSpacing(0));
+        panel.setPreferredSize(new TerminalSize(100, 100));
 
 
-            // Create gui and start gui
-            gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
-
-            gui.addWindowAndWait(window);
 
 
-        }
+        // Create window to hold the panel
+        BasicWindow window = new BasicWindow();
+        window.setComponent(panel);
+
+
+        // Create gui and start gui
+        gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+
+        gui.addWindowAndWait(window);
+
+
+    }
 
     public MultiWindowTextGUI getGui() {
         return gui;
