@@ -8,7 +8,7 @@ public class ServerMain {
     public static void main(String[] args) {
 
 
-        Server2nd server = new Server2nd(5000);
+        Server server = new Server();
         Thread thread = new Thread(server);
         thread.start();
 
