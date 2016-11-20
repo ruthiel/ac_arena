@@ -1,5 +1,6 @@
 package org.academiadecodigo.acarena.GameObjects;
 
+import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.TextColor;
 import org.academiadecodigo.acarena.position.FieldPosition;
 
@@ -14,21 +15,21 @@ public enum PlayerNumber {
     FOUR (TextColor.YELLOW);
 
     private TextColor color;
-    private FieldPosition position;
+    private LanternaFieldPosition position;
 
     PlayerNumber(TextColor color){
         this.position = setPosition();
         this.color = color;
     }
 
-    public FieldPosition setPosition(){
+    public LanternaFieldPosition setPosition(){
 
         switch (this) {
             case ONE:
                 position.setPos(1,1);
                 break;
             case TWO:
-                position.setPos(2,0);
+                position.setPos(47,1);
                 break;
             case THREE:
                 position.setPos(3,0);

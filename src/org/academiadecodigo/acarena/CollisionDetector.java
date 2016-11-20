@@ -1,7 +1,7 @@
 package org.academiadecodigo.acarena;
 
 import org.academiadecodigo.acarena.GameObjects.GameObject;
-import org.academiadecodigo.acarena.GameObjects.Movable.Player;
+import org.academiadecodigo.acarena.GameObjects.Movable.ShittyPlayer;
 import org.academiadecodigo.acarena.GameObjects.Weapon;
 import org.academiadecodigo.acarena.position.FieldPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
@@ -31,7 +31,7 @@ public class CollisionDetector {
     //Checks for collisions with player
     //
 
-    public void check(Player player) {
+    public void check(ShittyPlayer player) {
 
         for (GameObject ob : objects) {
 
@@ -50,7 +50,7 @@ public class CollisionDetector {
 
         FieldPosition tempPosition = adjacentPosition(direction, object);
 
-        if (object instanceof Player) {
+        if (object instanceof ShittyPlayer) {
 
             for (int i = 0; i < objects.length; i++) {
                 if (!objects[i].getPosition().equals(tempPosition)) {

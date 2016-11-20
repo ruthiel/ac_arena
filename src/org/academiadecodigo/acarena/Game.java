@@ -1,15 +1,13 @@
 package org.academiadecodigo.acarena;
 
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.input.KeyStroke;
 import org.academiadecodigo.acarena.networking.server.GameClient;
 
 
 import org.academiadecodigo.acarena.GameObjects.GameObjectsFactory;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
-import test.PlayerTest;
+import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 
 
 import java.io.IOException;
@@ -23,9 +21,9 @@ public class Game {
 
     private GameObjectsFactory factory;
     private LanternaField lanternaField;
-    private Map<String, PlayerTest> playerTestMap;
+    private Map<String, Player> playerTestMap;
     private LanternaFieldPosition lanternaFieldPosition;
-    private PlayerTest player;
+    private Player player;
 
 
     public Game(Map<GameClient, String> map) throws IOException {
@@ -36,7 +34,7 @@ public class Game {
         playerTestMap = new HashMap<>();
 
         for (String value : map.values()) {
-            PlayerTest player = new PlayerTest(new LanternaFieldPosition(10, 10, lanternaField), lanternaField);
+            Player player = new Player(new LanternaFieldPosition(10, 10, lanternaField), lanternaField);
             playerTestMap.put(value, player);
             player.repaint();
 
@@ -52,27 +50,30 @@ public class Game {
 
         switch (data) {
             case "u":
+                lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.UP, 1);
                 lanternaField.repaint(player.getPosition());
                 System.out.println(player.getPosition());
                 break;
 
             case "d":
+                lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.DOWN, 1);
                 lanternaField.repaint(player.getPosition());
                 System.out.println(player.getPosition());
                 break;
 
             case "l":
+                lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.LEFT, 1);
                 lanternaField.repaint(player.getPosition());;
                 System.out.println(player.getPosition());
                 break;
 
             case "r":
+                lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.RIGHT, 1);
                 lanternaField.repaint(player.getPosition());
-
                 System.out.println(player.getPosition());
                 break;
 

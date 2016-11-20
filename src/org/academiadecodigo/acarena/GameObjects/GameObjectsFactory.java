@@ -1,14 +1,10 @@
 package org.academiadecodigo.acarena.GameObjects;
 
-import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.Label;
-import org.academiadecodigo.acarena.GameObjects.Movable.Boss;
 import org.academiadecodigo.acarena.GameObjects.Movable.EmptySlut;
-import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
-import test.PlayerTest;
 
 import java.io.IOException;
 
@@ -38,11 +34,11 @@ public class GameObjectsFactory {
     }
 
 
-    // NOT RIGHT! Player is created with new Client!!!
+    // NOT RIGHT! ShittyPlayer is created with new Client!!!
     //    public void getNewPlayers(Field field) {
     //
-    //        Player player1 = new Player(PlayerNumber.ONE);
-    //        Player player2 = new Player(PlayerNumber.TWO);
+    //        ShittyPlayer player1 = new ShittyPlayer(PlayerNumber.ONE);
+    //        ShittyPlayer player2 = new ShittyPlayer(PlayerNumber.TWO);
     //
     //    }
 

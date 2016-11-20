@@ -1,6 +1,5 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
-import org.academiadecodigo.acarena.CollisionDetector;
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.position.FieldPosition;
 import org.academiadecodigo.acarena.GameObjects.WeaponType;
