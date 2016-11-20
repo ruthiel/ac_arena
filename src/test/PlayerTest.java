@@ -1,15 +1,20 @@
 package test;
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.input.*;
+import com.googlecode.lanterna.screen.AbstractScreen;
 import com.googlecode.lanterna.screen.Screen;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
+import org.academiadecodigo.acarena.position.FieldPosition;
 
 import java.awt.*;
 import java.io.IOException;
@@ -17,17 +22,30 @@ import java.io.IOException;
 /**
  * Created by codecadet on 14/11/16.
  */
-public class PlayerTest {
+public class PlayerTest extends GameObject {
+    AbstractFieldPosition pos;
+    LanternaField lanternaField;
+    Label label;
 
-    private AbstractFieldPosition pos;
 
-    public PlayerTest(LanternaField lanternaField) throws IOException {
+    public PlayerTest(LanternaFieldPosition position, LanternaField lanternaField) throws IOException {
+        super(position);
+        this.pos = position;
+        this.lanternaField = lanternaField;
+
+        setColor(TextColor.ANSI.BLUE);
+        setName("  ");
+        this.label = new Label(this.getName()).setBackgroundColor(this.getColor()).setSize(new TerminalSize(1, 1)).setLabelWidth(2);
+        lanternaField.getPanel().addComponent(label);
 
 
-        this.pos = new LanternaFieldPosition(0, 0, lanternaField);
-       // pos.show();
+        // pos.show();
+
+
+    }
+
+    public void run() throws IOException {
         KeyStroke keyStroke = null;
-
         while (true) {
             System.out.println("im here");
             keyStroke = lanternaField.getScreen().readInput();
@@ -35,38 +53,45 @@ public class PlayerTest {
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
-                    pos.hide();
                     pos.moveUp(1);
+                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
+                    lanternaField.getGui().updateScreen();
                     System.out.println(pos.toString());
                     break;
 
                 case ArrowDown:
-                    pos.hide();
                     pos.moveDown(1);
+                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
+                    lanternaField.getGui().updateScreen();
                     System.out.println(pos.toString());
-                   // pos.show();
+                    // pos.show();
 
                     break;
                 case ArrowLeft:
-                    pos.hide();
                     pos.moveLeft(1);
+                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
+                    lanternaField.getGui().updateScreen();
                     System.out.println(pos.toString());
-                   // pos.show();
+                    // pos.show();
 
                     break;
                 case ArrowRight:
-                    pos.hide();
                     pos.moveRight(1);
+
+                    label.setPosition(new TerminalPosition(pos.getCol(), pos.getRow()));
+                    lanternaField.getGui().updateScreen();
                     System.out.println(pos.toString());
                     System.out.println(((LanternaField) pos.getField()).getScreen().toString().getBytes());
-                   // pos.show();
+                    // pos.show();
                     break;
                 default:
                     System.out.println("W8iting for Input motherfucker");
                     break;
             }
+
         }
     }
-
 }
+
+
 

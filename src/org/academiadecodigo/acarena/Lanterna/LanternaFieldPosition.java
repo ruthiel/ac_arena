@@ -67,7 +67,6 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
 
     @Override
     public void hide() throws IOException {
-        ((LanternaField) getField()).getScreen().setCharacter(getCol(), getRow(), new TextCharacter(' '));
 
 
     }

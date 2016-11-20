@@ -32,8 +32,10 @@ public class Game {
 
         lanternaField = new LanternaField(50, 50);
         Thread thread = new Thread(lanternaField);
+
         thread.start();
-        PlayerTest playerTest = new PlayerTest(lanternaField);
+        lanternaField.getPlayer().run();
+
 
     }
 }

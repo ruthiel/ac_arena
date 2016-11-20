@@ -15,6 +15,7 @@ import org.academiadecodigo.acarena.Game;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.GameObjectsFactory;
 import org.academiadecodigo.acarena.position.FieldPosition;
+import test.PlayerTest;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -29,6 +30,8 @@ public class LanternaField implements Field, Runnable {
     private GameObject[][] gameObjects;
     private Panel panel;
     private Terminal terminal;
+    private MultiWindowTextGUI gui;
+    private PlayerTest player;
 
     public LanternaField(int rows, int cols) throws IOException {
         this.rows = rows;
@@ -37,7 +40,17 @@ public class LanternaField implements Field, Runnable {
         this.panel = new Panel();
         terminal = new DefaultTerminalFactory().createTerminal();
         screen = new TerminalScreen(terminal);
+        screen.startScreen();
+        GameObjectsFactory factory = new GameObjectsFactory(this);
+        factory.populateFieldWithWalls();
+        factory.populateFieldWithFuckinWeapons();
+        player = factory.getPlayertest();
 
+
+    }
+
+    public PlayerTest getPlayer() {
+        return player;
     }
 
     public Panel getPanel() {
@@ -88,16 +101,10 @@ public class LanternaField implements Field, Runnable {
     @Override
     public void run() {
 
-        try {
+
 
             panel.setLayoutManager(new GridLayout(cols).setHorizontalSpacing(0));
             panel.setPreferredSize(new TerminalSize(100, 100));
-
-            screen.startScreen();
-
-            GameObjectsFactory factory = new GameObjectsFactory(this);
-            factory.populateFieldWithWalls();
-            factory.populateFieldWithFuckinWeapons();
 
 
             // Create window to hold the panel
@@ -106,12 +113,14 @@ public class LanternaField implements Field, Runnable {
 
 
             // Create gui and start gui
-            MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+            gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+
             gui.addWindowAndWait(window);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
+    public MultiWindowTextGUI getGui() {
+        return gui;
     }
 }

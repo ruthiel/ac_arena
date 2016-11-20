@@ -7,6 +7,7 @@ import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
+import test.PlayerTest;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ public class GameObjectsFactory {
     private FieldPosition position;
     private GameObject[][] gameObjects;
     private LanternaField lanternaField;
+    private PlayerTest playertest;
 
     private int cols;
     private int rows;
@@ -49,12 +51,24 @@ public class GameObjectsFactory {
 
     }
 
+    public PlayerTest getPlayertest() {
+        return playertest;
+    }
 
     public void populateFieldWithWalls() {
 
         try {
             for (int i = 0; i < cols; i++) {
                 for (int j = 0; j < rows; j++) {
+                    if(i == 48 && j == 48){
+                        gameObjects[i][j] = new PlayerTest(new LanternaFieldPosition(i, j, lanternaField),lanternaField);
+                        playertest = (PlayerTest) gameObjects[i][j];
+
+                    }
+                    if(i == 49 && j == 49){
+                        return;
+                    }
+
 
                     //Creates walls around field
 
@@ -77,8 +91,10 @@ public class GameObjectsFactory {
                         gameObjects[i][j].getPosition().create(gameObjects[i][j]);
                         continue;
                     }
+
                     gameObjects[i][j] = new EmptySlut(new LanternaFieldPosition(i, j, lanternaField));
                     gameObjects[i][j].getPosition().create(gameObjects[i][j]);
+
 
                 }
             }
