@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class Server implements Runnable {
     static Map<GameClient, String> map;
+    private LinkedList<GameClient> clientList;
     private Game game;
     boolean gameOnline;
 
@@ -47,11 +48,12 @@ public class Server implements Runnable {
 
             if (map.containsValue(String.valueOf(receivePacket.getAddress()))) {
                 System.out.println("Cliente existente");
-                while(iterator.hasNext()) {
-                    iterator.next().sendPacket(receivePacket);
+                for (int i = 0; i < clientList.size(); i++) {
+                    clientList.get(i).sendPacket(receivePacket);
+                    continue;
                 }
-                continue;
             }
+
             String ip = String.valueOf(receivePacket.getAddress());
             GameClient client = null;
             try {
@@ -59,18 +61,24 @@ public class Server implements Runnable {
             } catch (SocketException e) {
                 e.printStackTrace();
             }
+
             Thread clientThread = new Thread(client);
             clientThread.start();
+            clientList.add(client);
             map.put(client, ip);
-            byte[] sendBuffer = new byte[2048];
             System.out.println(map.size());
 
+            byte[] sendBuffer = new byte[2048];
 
-            while(iterator.hasNext()) {
-                iterator.next().sendPacket(receivePacket);
+            for (int i = 0; i < clientList.size(); i++) {
+                clientList.get(i).sendPacket(receivePacket);
             }
 
-            if ( map.size() == 1 && gameOnline == false) {
+//            for (GameClient papaChuchas : clientList) {
+//                papaChuchas.sendPacket(receivePacket);
+//            }
+
+            if (map.size() == 1 && gameOnline == false) {
                 try {
                     game = new Game(map);
                 } catch (IOException e) {

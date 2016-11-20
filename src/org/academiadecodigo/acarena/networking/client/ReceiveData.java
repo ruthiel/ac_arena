@@ -26,30 +26,23 @@ public class ReceiveData implements Runnable {
         this.socket = datagramSocket;
         this.packet = receivePacket;
         this.screen = screen;
-
-
     }
 
     @Override
     public void run() {
         while (true) {
-            try {
-                socket.receive(packet);
-                if (packet == null) {
-                    continue;
-                }
 
-                screen = (Screen) toObject(packet.getData());
+            byte[] receiveBuffer = new byte[2048];
+            DatagramPacket recPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+
+            try {
+                socket.receive(recPacket);
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
-
-
-            packet = null;
+            System.out.println(recPacket.toString());
         }
-    }
+        }
 
     public static Object toObject(byte[] bytes) throws IOException, ClassNotFoundException {
         Object obj = null;

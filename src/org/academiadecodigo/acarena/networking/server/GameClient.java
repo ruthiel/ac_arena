@@ -17,18 +17,18 @@ public class GameClient implements Runnable {
 
     public GameClient(DatagramPacket receivePacket, DatagramSocket socket) throws SocketException {
         this.socket = socket;
-        address = receivePacket.getAddress();
-        port = receivePacket.getPort();
+        this.address = receivePacket.getAddress();
+        this.port = receivePacket.getPort();
     }
 
     @Override
     public void run() {
+
     }
 
     public void sendPacket(DatagramPacket datagramPacket) {
-        this.packet = datagramPacket;
         try {
-            socket.send(new DatagramPacket(datagramPacket.getData(), datagramPacket.getLength(), address, port));
+            socket.send(new DatagramPacket(datagramPacket.getData(), datagramPacket.getLength(), this.address, this.port));
         } catch (IOException e) {
             e.printStackTrace();
         }
