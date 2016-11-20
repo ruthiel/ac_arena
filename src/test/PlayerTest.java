@@ -35,9 +35,8 @@ public class PlayerTest extends GameObject {
 
         setColor(TextColor.ANSI.BLUE);
         setName("  ");
-
-
     }
+
     public void repaint() throws IOException {
         lanternaField.repaint(getPosition());
     }

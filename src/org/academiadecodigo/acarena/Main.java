@@ -21,8 +21,5 @@ public class Main {
         Thread thread = new Thread(server);
         thread.start();
 
-        Game game = new Game(Server.getMap());
-
-
     }
 }

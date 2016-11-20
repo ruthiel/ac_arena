@@ -10,13 +10,15 @@ import java.util.*;
  * Created by codecadet on 14/11/16.
  */
 public class Server implements Runnable {
-     static Map<String,GameClient> map;
-
+    static Map<GameClient, String> map;
+    private Game game;
+    boolean gameOnline;
 
     public Server() {
-    map = new HashMap<>();
+        map = new HashMap<>();
     }
-    public static Map<String, GameClient> getMap() {
+
+    public static Map<GameClient, String> getMap() {
         return map;
     }
 
@@ -24,11 +26,13 @@ public class Server implements Runnable {
     public void run() {
         DatagramSocket socket = null;
         int portNumber = 5000;
+
         try {
             socket = new DatagramSocket(portNumber);
         } catch (SocketException e) {
             e.printStackTrace();
         }
+
         while (true) {
             System.out.println("----- Server open ------");
             byte[] receiveBuffer = new byte[2048];
@@ -38,11 +42,11 @@ public class Server implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (map.containsKey(receivePacket.getAddress())) {
+            if (map.containsValue(String.valueOf(receivePacket.getAddress()))) {
                 System.out.println("Cliente existente");
                 continue;
             }
-            String upper = String.valueOf(receivePacket.getAddress());
+            String ip = String.valueOf(receivePacket.getAddress());
             GameClient client = null;
             try {
                 client = new GameClient(receivePacket, socket);
@@ -51,15 +55,24 @@ public class Server implements Runnable {
             }
             Thread clientThread = new Thread(client);
             clientThread.start();
-            map.put(upper, client);
+            map.put(client, ip);
             byte[] sendBuffer = new byte[2048];
             System.out.println(map.size());
-            for (GameClient value : map.values()) {
-                value.sendPacket(receivePacket);
+
+            Iterator<GameClient> iterator = map.keySet().iterator();
+
+            while(iterator.hasNext()) {
+                iterator.next().sendPacket(receivePacket);
             }
 
+            if ( map.size() == 1 && gameOnline == false) {
+                try {
+                    game = new Game(map);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                gameOnline = true;
+            }
         }
     }
-
-
 }

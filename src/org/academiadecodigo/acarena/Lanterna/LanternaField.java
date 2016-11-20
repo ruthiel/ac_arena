@@ -108,7 +108,6 @@ public class LanternaField implements Field, Runnable {
     public void repaint(FieldPosition position) throws IOException {
 
 //        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(),this);
-
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 if (labels[j][i].getPosition().getColumn() == position.getCol()
@@ -117,34 +116,23 @@ public class LanternaField implements Field, Runnable {
                     labels[j][i].setText("  ");
                     labels[j][i].setBackgroundColor(TextColor.ANSI.RED);
                     getGui().updateScreen();
-
                 }
             }
         }
     }
 
-
     @Override
     public void run() {
-
-
         panel.setLayoutManager(new GridLayout(cols).setHorizontalSpacing(0));
-        panel.setPreferredSize(new TerminalSize(100, 100));
-
-
-
+        panel.setPreferredSize(new TerminalSize(100, 50));
 
         // Create window to hold the panel
         BasicWindow window = new BasicWindow();
         window.setComponent(panel);
 
-
         // Create gui and start gui
         gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
-
         gui.addWindowAndWait(window);
-
-
     }
 
     public MultiWindowTextGUI getGui() {

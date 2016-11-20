@@ -20,15 +20,15 @@ public class GameClient implements Runnable {
         address = receivePacket.getAddress();
         port = receivePacket.getPort();
     }
+
     @Override
     public void run() {
-
     }
 
     public void sendPacket(DatagramPacket datagramPacket) {
         this.packet = datagramPacket;
         try {
-            socket.send(new DatagramPacket(datagramPacket.getData(), datagramPacket.getLength(), address, port)); // TODO: 18/11/16 parse the data to find the new port to send to
+            socket.send(new DatagramPacket(datagramPacket.getData(), datagramPacket.getLength(), address, port));
         } catch (IOException e) {
             e.printStackTrace();
         }
