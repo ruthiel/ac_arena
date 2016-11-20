@@ -86,10 +86,6 @@ public class Server implements Runnable {
                     clientList.get(i).sendPacket(sendPacket);
                 }
 
-//            for (GameClient papaChuchas : clientList) {
-//                papaChuchas.sendPacket(receivePacket);
-//            }
-
                 if (map.size() == 1 && gameOnline == false) {
                     try {
                         game = new Game(map);

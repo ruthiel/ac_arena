@@ -19,15 +19,12 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         int portServer = 5000;
-        String ipServer = "192.168.1.24";
+        String ipServer = "localhost";
 
         DatagramSocket clientSocket = new DatagramSocket();
 
         Screen screen = null;
         KeyStroke keyStroke;
-
-
-
 
         try {
             clientSocket = new DatagramSocket();
@@ -37,14 +34,10 @@ public class Client {
             screen.getTerminalSize().withRows(80);
             screen.startScreen();
 
-
             byte[] receiveBuffer = new byte[2048];
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             Thread thread = new Thread(new ReceiveData(screen,receivePacket,clientSocket));
             thread.start();
-
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,7 +46,6 @@ public class Client {
             System.out.println("im here");
             keyStroke = screen.readInput();
             DatagramPacket datagramPacket;
-
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
@@ -77,9 +69,5 @@ public class Client {
                     break;
             }
         }
-
-
     }
-
-
 }

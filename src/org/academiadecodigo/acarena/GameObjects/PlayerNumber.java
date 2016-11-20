@@ -11,12 +11,7 @@ public enum PlayerNumber {
     ONE (TextColor.BLUE),
     TWO (TextColor.RED),
     THREE (TextColor.GREEN),
-    FOUR (TextColor.YELLOW),
-    FIVE (TextColor.MAGENTA),
-    SIX (TextColor.ORANGE);
-
-    //Each Player must have an initial position that is fixed!
-    //See other enums for this!
+    FOUR (TextColor.YELLOW);
 
     private TextColor color;
     private FieldPosition position;
@@ -40,12 +35,6 @@ public enum PlayerNumber {
                 break;
             case FOUR:
                 position.setPos(4,0);
-                break;
-            case FIVE:
-                position.setPos(5,0);
-                break;
-            case SIX:
-                position.setPos(6,0);
                 break;
         }
 
