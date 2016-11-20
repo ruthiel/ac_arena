@@ -52,25 +52,24 @@ public class Client {
         while (true) {
             System.out.println("im here");
             keyStroke = screen.readInput();
-            byte[] bytes = keyStroke.toString().getBytes();
             DatagramPacket datagramPacket;
 
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
-                    datagramPacket = new DatagramPacket(bytes, bytes.length, InetAddress.getByName(ipServer),portServer );
+                    datagramPacket = new DatagramPacket("u".getBytes(), "u".length(), InetAddress.getByName(ipServer),portServer );
                     clientSocket.send(datagramPacket);
                     break;
                 case ArrowDown:
-                    datagramPacket = new DatagramPacket(bytes, bytes.length, InetAddress.getByName(ipServer), portServer);
+                    datagramPacket = new DatagramPacket("d".getBytes(), "d".length(), InetAddress.getByName(ipServer), portServer);
                     clientSocket.send(datagramPacket);
                     break;
                 case ArrowLeft:
-                    datagramPacket = new DatagramPacket(bytes, bytes.length, InetAddress.getByName(ipServer), portServer);
+                    datagramPacket = new DatagramPacket("l".getBytes(), "l".length(), InetAddress.getByName(ipServer), portServer);
                     clientSocket.send(datagramPacket);
                     break;
                 case ArrowRight:
-                    datagramPacket = new DatagramPacket(bytes, bytes.length, InetAddress.getByName(ipServer), portServer);
+                    datagramPacket = new DatagramPacket("r".getBytes(), "r".length(), InetAddress.getByName(ipServer), portServer);
                     clientSocket.send(datagramPacket);
                     break;
                 default:

@@ -1,8 +1,11 @@
 package org.academiadecodigo.acarena.networking.server;
 
+import com.googlecode.lanterna.input.KeyStroke;
 import org.academiadecodigo.acarena.Game;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.*;
 import java.util.*;
 
@@ -41,7 +44,12 @@ public class Server implements Runnable {
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             try {
                 socket.receive(receivePacket);
+                String data = new String(receivePacket.getData());
+
+                movePlayer(data, receivePacket);
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
@@ -54,24 +62,24 @@ public class Server implements Runnable {
                     clientList.get(i).sendPacket(receivePacket);
                     continue;
                 }
-            } else{
+            } else {
 
-            String ip = String.valueOf(receivePacket.getAddress());
-            GameClient client = null;
-            try {
-                client = new GameClient(receivePacket, socket);
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
+                String ip = String.valueOf(receivePacket.getAddress());
+                GameClient client = null;
+                try {
+                    client = new GameClient(receivePacket, socket);
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                }
 
-            Thread clientThread = new Thread(client);
-            clientThread.start();
-            clientList.add(client);
-            map.put(client, ip);
-            System.out.println(map.size());
+                Thread clientThread = new Thread(client);
+                clientThread.start();
+                clientList.add(client);
+                map.put(client, ip);
+                System.out.println(map.size());
 
-            byte[] sendBuffer = new byte[2048];
-                DatagramPacket sendPacket = new DatagramPacket(receiveBuffer,receiveBuffer.length);
+                byte[] sendBuffer = new byte[2048];
+                DatagramPacket sendPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
 
 
                 for (int i = 0; i < clientList.size(); i++) {
@@ -92,4 +100,14 @@ public class Server implements Runnable {
                 }
             }
         }
-    }}
+    }
+
+    private void movePlayer(String data ,DatagramPacket datagramPacket) throws IOException, ClassNotFoundException {
+        System.out.println("before sending the message");
+        if(map.containsValue(String.valueOf(datagramPacket.getAddress()))){
+            System.out.println("sending message");
+            game.movePlayer(data, String.valueOf(datagramPacket.getAddress()));
+        }
+    }
+}
+
