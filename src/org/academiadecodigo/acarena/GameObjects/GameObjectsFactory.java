@@ -64,30 +64,25 @@ public class GameObjectsFactory {
 
                     if (i == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
-                        gameObjects[i][j].getPosition().create(gameObjects[i][j]);
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         System.out.println(i + "," + j );
                         continue;
                     } else if (j == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
-                        gameObjects[i][j].getPosition().create(gameObjects[i][j]);
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         System.out.println(i + "," +j);
                         continue;
                     } else if (j == rows - 1) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
-                        gameObjects[i][j].getPosition().create(gameObjects[i][j]);
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         continue;
                     } else if (i == cols-1 ) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
-                        gameObjects[i][j].getPosition().create(gameObjects[i][j]);
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         continue;
                     }
 
                     gameObjects[i][j] = new EmptySlut(new LanternaFieldPosition(i, j, lanternaField));
-                    gameObjects[i][j].getPosition().create(gameObjects[i][j]);
                     labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
 
 

@@ -53,25 +53,26 @@ public class Game {
         switch (data) {
             case "u":
                 player.getPosition().moveInDirection(Direction.UP, 1);
-                player.repaint();
+                lanternaField.repaint(player.getPosition());
                 System.out.println(player.getPosition());
                 break;
 
             case "d":
                 player.getPosition().moveInDirection(Direction.DOWN, 1);
-                player.repaint();
+                lanternaField.repaint(player.getPosition());
                 System.out.println(player.getPosition());
                 break;
 
             case "l":
                 player.getPosition().moveInDirection(Direction.LEFT, 1);
-                player.repaint();
+                lanternaField.repaint(player.getPosition());;
                 System.out.println(player.getPosition());
                 break;
 
             case "r":
                 player.getPosition().moveInDirection(Direction.RIGHT, 1);
-                player.repaint();
+                lanternaField.repaint(player.getPosition());
+
                 System.out.println(player.getPosition());
                 break;
 
