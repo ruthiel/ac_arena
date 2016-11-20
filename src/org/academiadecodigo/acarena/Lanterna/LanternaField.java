@@ -51,6 +51,7 @@ public class LanternaField implements Field {
         screen.getTerminalSize().withColumns(cols);
         screen.getTerminalSize().withRows(rows);
         screen.startScreen();
+        System.out.println(terminal.getTerminalSize());
 
     }
 

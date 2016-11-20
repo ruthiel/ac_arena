@@ -26,8 +26,10 @@ public class GameObjectsFactory {
 
     public GameObjectsFactory(LanternaField lanternaField) {
         this.lanternaField = lanternaField;
-        cols = lanternaField.getCols();
-        rows = lanternaField.getRows();
+//        cols = lanternaField.getCols();
+//        rows = lanternaField.getRows();
+        cols = 80;
+        rows = 24;
         gameObjects = new GameObject[rows][cols];
     }
 
@@ -47,7 +49,6 @@ public class GameObjectsFactory {
 
     }
 
-
     public void populateFieldWithWalls() {
 
         try {
@@ -56,20 +57,28 @@ public class GameObjectsFactory {
 
                     //Creates walls around field
 
-                    if (i == 0) {
+                    if (i == 0 || i == cols-1) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().show();
                         System.out.println(i+","+j);
-                    } else if (j == 0) {
+                        System.out.println("printed COLS");
+                    }
+//                    else if (i == cols-1) {
+//                        gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
+//                        gameObjects[i][j].getPosition().show();
+//                        System.out.println(i+","+j);
+//                        System.out.println("printed COL Right");
+//                    }
+                    else if (j == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().show();
                         System.out.println(i+","+j);
-                    } else if (j == rows -10) {
+                        System.out.println("printed ROW Top");
+                    } else if (j == rows-1) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         gameObjects[i][j].getPosition().show();
-                    } else if (i == cols -10) {
-                        gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
-                        gameObjects[i][j].getPosition().show();
+                        System.out.println(i+","+j);
+                        System.out.println("printed ROW Bottom");
                     }
 
 //                    if (i = )

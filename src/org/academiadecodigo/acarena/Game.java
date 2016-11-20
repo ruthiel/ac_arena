@@ -21,7 +21,7 @@ public class Game {
 
     public Game() {
 
-        lanternaField = new LanternaField(50,50);
+        lanternaField = new LanternaField(80,24);
 
         try {
             lanternaField.init();
