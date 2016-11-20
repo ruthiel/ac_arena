@@ -2,7 +2,8 @@ package org.academiadecodigo.acarena.position;
 
 
 import org.academiadecodigo.acarena.Direction;
-import org.academiadecodigo.acarena.FieldColor;
+import org.academiadecodigo.acarena.GameObjects.GameObject;
+import org.academiadecodigo.acarena.TextColor;
 
 import java.io.IOException;
 
@@ -25,6 +26,8 @@ public interface FieldPosition {
      */
     public int getRow();
 
+    void setColor(TextColor color);
+
     /**
      * Updates the position column and row
      *
@@ -38,19 +41,19 @@ public interface FieldPosition {
      *
      * @return the position getColor
      */
-    public FieldColor getColor();
+    public TextColor getColor();
 
     /**
      * Changes the getColor of this grid position
      *
      * @param color the new position getColor
      */
-    public void setColor(FieldColor color);
+    public void setColor(com.googlecode.lanterna.TextColor color);
 
     /**
      * Displays the position in the grid
      */
-    public void show() throws IOException;
+    public void show(GameObject gameObject) throws IOException;
 
     /**
      * Hides the position in the grid
@@ -73,4 +76,5 @@ public interface FieldPosition {
      */
     public boolean equals(FieldPosition position);
 
+    void create(GameObject gameObject);
 }

@@ -1,9 +1,10 @@
 package org.academiadecodigo.acarena.Lanterna;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.gui2.Label;
 import org.academiadecodigo.acarena.Direction;
-import org.academiadecodigo.acarena.FieldColor;
+import org.academiadecodigo.acarena.TextColor;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
@@ -18,12 +19,11 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
     /**
      * Construct a new random field position
      *
-     * @param field  the field where the position will live on
+     * @param field the field where the position will live on
      */
     public LanternaFieldPosition(LanternaField field) throws IOException {
 
         super((int) (Math.random() * field.getCols()), (int) (Math.random() * field.getRows()), field);
-        show();
 
     }
 
@@ -32,7 +32,7 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
      *
      * @param col   the grid position column
      * @param row   the  grid position row
-     * @param field  the grid where the position will live on
+     * @param field the grid where the position will live on
      */
     public LanternaFieldPosition(int col, int row, LanternaField field) throws IOException {
 
@@ -41,20 +41,15 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
     }
 
     @Override
-    public FieldColor getColor() {
+    public TextColor getColor() {
         return null;
     }
 
     @Override
-    public void setColor(FieldColor color) {
+    public void setColor(com.googlecode.lanterna.TextColor color) {
 
     }
 
-    @Override
-    public void show() throws IOException {
-        ((LanternaField)getField()).getScreen().setCharacter(this.getCol(), this.getRow(), new TextCharacter(' ', TextColor.RGB.Indexed.fromRGB(179,179,179), TextColor.RGB.Indexed.fromRGB(255,255,255)));
-        ((LanternaField)getField()).getScreen().refresh();
-    }
 
 
 //    public void show() throws IOException {
@@ -63,14 +58,15 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
 //    }
 
 
+    @Override
     public void show(GameObject object) throws IOException {
-        ((LanternaField)getField()).getScreen().setCharacter(object.getPosition().getCol(), object.getPosition().getRow(), new TextCharacter(object.getChar()));
-        ((LanternaField)getField()).getScreen().refresh();
+
+
+
     }
 
     @Override
     public void hide() throws IOException {
-        ((LanternaField)getField()).getScreen().setCharacter(getCol(),getRow(), new TextCharacter(' '));
 
 
     }
@@ -85,8 +81,12 @@ public class LanternaFieldPosition extends AbstractFieldPosition {
 
         hide();
         super.moveInDirection(direction, distance);
-        show();
 
+    }
+
+    @Override
+    public void create(GameObject object){
+        ((LanternaField) getField()).getPanel().addComponent(new Label(object.getName()).setBackgroundColor(object.getColor()).setSize(new TerminalSize(1,1)).setLabelWidth(2));
     }
 
 }

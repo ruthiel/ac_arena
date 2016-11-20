@@ -14,7 +14,8 @@ public class Wall extends GameObject {
 
     public Wall(FieldPosition fieldPosition) {
         super(fieldPosition);
-        setCharacter(new TextCharacter(' ', TextColor.RGB.Indexed.fromRGB(179,179,179), TextColor.RGB.Indexed.fromRGB(255,255,255)));
+        setColor(TextColor.ANSI.YELLOW);
+        setName("  ");
     }
 
     @Override

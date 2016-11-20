@@ -1,9 +1,14 @@
 package org.academiadecodigo.acarena;
 
+
+import org.academiadecodigo.acarena.networking.server.GameClient;
+
+
 import org.academiadecodigo.acarena.GameObjects.GameObjectsFactory;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
-import org.academiadecodigo.acarena.networking.server.GameClient;
+import test.PlayerTest;
+
 
 import java.io.IOException;
 import java.util.Map;
@@ -13,33 +18,24 @@ import java.util.Map;
  */
 public class Game {
 
-    private GameObjectsFactory factory;
-    private LanternaField lanternaField;
-    private Map<String,GameClient> map;
-    private LanternaFieldPosition lanternaFieldPosition;
-
-
-    public Game() {
-
-        lanternaField = new LanternaField(50,50);
-
-        try {
-            lanternaField.init();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        factory = new GameObjectsFactory(lanternaField);
-        factory.populateFieldWithWalls();
-        factory.populateFieldWithFuckinWeapons();
-
-
+    public Game(Map<String, GameClient> map) {
     }
 
 
+    private GameObjectsFactory factory;
+    private LanternaField lanternaField;
+    private Map<String, GameClient> map;
+    private LanternaFieldPosition lanternaFieldPosition;
 
 
+    public Game() throws IOException {
+
+        lanternaField = new LanternaField(50, 50);
+        Thread thread = new Thread(lanternaField);
+
+        thread.start();
+        lanternaField.getPlayer().run();
 
 
-
+    }
 }

@@ -1,5 +1,7 @@
 package org.academiadecodigo.acarena.networking.server;
 
+import org.academiadecodigo.acarena.Game;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.*;

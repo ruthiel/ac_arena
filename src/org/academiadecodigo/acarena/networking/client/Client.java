@@ -19,7 +19,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         int portServer = 5000;
-        String ipServer = "192.168.1.24";
+        String ipServer = "localhost";
 
         DatagramSocket clientSocket = new DatagramSocket();
 
@@ -42,7 +42,7 @@ public class Client {
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             Thread thread = new Thread(new ReceiveData(screen,receivePacket,clientSocket));
             thread.start();
-            portServer = receivePacket.getPort();
+
 
 
 
