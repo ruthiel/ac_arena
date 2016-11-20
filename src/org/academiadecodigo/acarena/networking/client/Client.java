@@ -1,22 +1,15 @@
 package org.academiadecodigo.acarena.networking.client;
 
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.ScreenBuffer;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -39,7 +32,7 @@ public class Client {
         try {
             clientSocket = new DatagramSocket();
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
-
+            screen = new TerminalScreen(terminal);
             screen.getTerminalSize().withColumns(50);
             screen.getTerminalSize().withRows(80);
             screen.startScreen();
@@ -49,7 +42,7 @@ public class Client {
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             Thread thread = new Thread(new ReceiveData(screen,receivePacket,clientSocket));
             thread.start();
-            portServer = receivePacket.getPort();
+
 
 
 

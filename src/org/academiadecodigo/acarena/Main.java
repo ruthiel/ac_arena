@@ -1,12 +1,9 @@
 package org.academiadecodigo.acarena;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
+
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
+import org.academiadecodigo.acarena.networking.server.Server;
+import org.academiadecodigo.acarena.networking.server.Server2nd;
 import test.PlayerTest;
 
 import java.io.IOException;
@@ -17,10 +14,12 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        Game game = new Game();
-
-
-
+//        LanternaField lanternaField = new LanternaField(10,10);
+//        lanternaField.init();
+//        PlayerTest playerTest = new PlayerTest(lanternaField);
+        Server server = new Server();
+        Thread thread = new Thread(server);
+        thread.start();
 
     }
 }
