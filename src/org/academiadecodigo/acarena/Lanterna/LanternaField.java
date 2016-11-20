@@ -107,7 +107,7 @@ public class LanternaField implements Field, Runnable {
 
     public void repaint(FieldPosition position) throws IOException {
 
-//        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(),this);
+        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(),this);
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 if (labels[j][i].getPosition().getColumn() == position.getCol()
@@ -115,6 +115,8 @@ public class LanternaField implements Field, Runnable {
 
                     labels[j][i].setText("  ");
                     labels[j][i].setBackgroundColor(TextColor.ANSI.RED);
+                    getScreen().refresh();
+                    System.out.println("Pintar paredes");
                     getGui().updateScreen();
                 }
             }
@@ -125,6 +127,14 @@ public class LanternaField implements Field, Runnable {
     public void run() {
         panel.setLayoutManager(new GridLayout(cols).setHorizontalSpacing(0));
         panel.setPreferredSize(new TerminalSize(100, 50));
+
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
+                panel.addComponent(labels[j][i]);
+
+            }
+
+        }
 
         // Create window to hold the panel
         BasicWindow window = new BasicWindow();
