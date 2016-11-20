@@ -1,8 +1,11 @@
 package org.academiadecodigo.acarena.networking.server;
 
+import com.googlecode.lanterna.input.KeyStroke;
 import org.academiadecodigo.acarena.Game;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.*;
 import java.util.*;
 
@@ -11,6 +14,7 @@ import java.util.*;
  */
 public class Server implements Runnable {
     static Map<GameClient, String> map;
+    private LinkedList<GameClient> clientList;
     private Game game;
     boolean gameOnline;
 
@@ -26,6 +30,7 @@ public class Server implements Runnable {
     public void run() {
         DatagramSocket socket = null;
         int portNumber = 5000;
+        clientList = new LinkedList<>();
 
         try {
             socket = new DatagramSocket(portNumber);
@@ -39,7 +44,12 @@ public class Server implements Runnable {
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             try {
                 socket.receive(receivePacket);
+                String data = new String(receivePacket.getData());
+
+                movePlayer(data, receivePacket);
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
@@ -47,37 +57,57 @@ public class Server implements Runnable {
 
             if (map.containsValue(String.valueOf(receivePacket.getAddress()))) {
                 System.out.println("Cliente existente");
-                while(iterator.hasNext()) {
-                    iterator.next().sendPacket(receivePacket);
+                System.out.println(clientList.size());
+                for (int i = 0; i < clientList.size(); i++) {
+                    clientList.get(i).sendPacket(receivePacket);
+                    continue;
                 }
-                continue;
-            }
-            String ip = String.valueOf(receivePacket.getAddress());
-            GameClient client = null;
-            try {
-                client = new GameClient(receivePacket, socket);
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
-            Thread clientThread = new Thread(client);
-            clientThread.start();
-            map.put(client, ip);
-            byte[] sendBuffer = new byte[2048];
-            System.out.println(map.size());
+            } else {
 
-
-            while(iterator.hasNext()) {
-                iterator.next().sendPacket(receivePacket);
-            }
-
-            if ( map.size() == 1 && gameOnline == false) {
+                String ip = String.valueOf(receivePacket.getAddress());
+                GameClient client = null;
                 try {
-                    game = new Game(map);
-                } catch (IOException e) {
+                    client = new GameClient(receivePacket, socket);
+                } catch (SocketException e) {
                     e.printStackTrace();
                 }
-                gameOnline = true;
+
+                Thread clientThread = new Thread(client);
+                clientThread.start();
+                clientList.add(client);
+                map.put(client, ip);
+                System.out.println(map.size());
+
+                byte[] sendBuffer = new byte[2048];
+                DatagramPacket sendPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+
+
+                for (int i = 0; i < clientList.size(); i++) {
+                    clientList.get(i).sendPacket(sendPacket);
+                }
+
+//            for (GameClient papaChuchas : clientList) {
+//                papaChuchas.sendPacket(receivePacket);
+//            }
+
+                if (map.size() == 1 && gameOnline == false) {
+                    try {
+                        game = new Game(map);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    gameOnline = true;
+                }
             }
         }
     }
+
+    private void movePlayer(String data ,DatagramPacket datagramPacket) throws IOException, ClassNotFoundException {
+        System.out.println("before sending the message");
+        if(map.containsValue(String.valueOf(datagramPacket.getAddress()))){
+            System.out.println("sending message");
+            game.movePlayer(data, String.valueOf(datagramPacket.getAddress()));
+        }
+    }
 }
+

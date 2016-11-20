@@ -44,29 +44,35 @@ public class Game {
         }
     }
 
-    public void movePlayer(KeyStroke keyStroke, String ip) throws IOException {
+    public void movePlayer(String data, String ip) throws IOException {
 
         player = playerTestMap.get(ip);
+        data = data.substring(0,1);
+        System.out.println("the data is: " + data);
 
-        switch (keyStroke.getKeyType()) {
-            case ArrowUp:
+        switch (data) {
+            case "u":
                 player.getPosition().moveInDirection(Direction.UP, 1);
                 player.repaint();
+                System.out.println(player.getPosition());
                 break;
 
-            case ArrowDown:
+            case "d":
                 player.getPosition().moveInDirection(Direction.DOWN, 1);
                 player.repaint();
+                System.out.println(player.getPosition());
                 break;
 
-            case ArrowLeft:
+            case "l":
                 player.getPosition().moveInDirection(Direction.LEFT, 1);
                 player.repaint();
+                System.out.println(player.getPosition());
                 break;
 
-            case ArrowRight:
+            case "r":
                 player.getPosition().moveInDirection(Direction.RIGHT, 1);
                 player.repaint();
+                System.out.println(player.getPosition());
                 break;
 
             default:
