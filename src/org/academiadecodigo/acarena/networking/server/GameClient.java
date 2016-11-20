@@ -22,14 +22,27 @@ public class GameClient implements Runnable {
     }
     @Override
     public void run() {
+        while(true) {
+            if ( packet == null) {
+                continue;
+            } else {
+                try {
+                    socket.send(new DatagramPacket(packet.getData(), packet.getLength(), address, port)); // TODO: 18/11/16 parse the data to find the new port to send to
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            packet = null;
+        }
     }
 
     public void sendPacket(DatagramPacket datagramPacket) {
         this.packet = datagramPacket;
-        try {
-            socket.send(new DatagramPacket(datagramPacket.getData(), datagramPacket.getLength(), address, port)); // TODO: 18/11/16 parse the data to find the new port to send to
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            socket.send(new DatagramPacket(datagramPacket.getData(), datagramPacket.getLength(), address, port)); // TODO: 18/11/16 parse the data to find the new port to send to
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

@@ -43,11 +43,12 @@ public class Server2nd implements Runnable {
 
                 System.out.println(map.size());
 
-                if( map.containsKey(packetReceive.getAddress())) {
+                if (map.containsKey(packetReceive.getAddress())) {
                     for (GameClient value : map.values()) {
-                    value.sendPacket(packetReceive);
-                }
-                    continue;
+                        serverSocket.send(packetReceive);
+                        value.sendPacket(packetReceive);
+                        continue;
+                    }
                 }
                 DatagramSocket clientSocket = new DatagramSocket();
 
@@ -60,7 +61,9 @@ public class Server2nd implements Runnable {
 
                 byte[] sendBuffer = new byte[2048];
                 for (GameClient value : map.values()) {
+                    serverSocket.send(packetReceive);
                     value.sendPacket(packetReceive);
+
                 }
 
                 String toSend = "Connect to port: " + clientSocket.getLocalPort();
