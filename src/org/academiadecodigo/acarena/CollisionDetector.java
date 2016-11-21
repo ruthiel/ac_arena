@@ -40,7 +40,7 @@ public class CollisionDetector {
             }
 
             if (ob.getPosition().equals(player.getPosition())) {
-                player.collision();
+               // player.collision();
             }
 
         }

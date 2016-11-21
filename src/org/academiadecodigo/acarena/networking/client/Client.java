@@ -1,16 +1,11 @@
 package org.academiadecodigo.acarena.networking.client;
 
 
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -22,37 +17,27 @@ import java.net.InetAddress;
 public class Client {
 
 
-
     public static void main(String[] args) throws IOException {
         int portServer = 5000;
-        String ipServer = "192.168.1.21";
+        String ipServer = "localhost";
 
         DatagramSocket clientSocket = new DatagramSocket();
-
 
         Screen screen = null;
         KeyStroke keyStroke;
 
-
-
-
         try {
+            clientSocket = new DatagramSocket();
+            Terminal terminal = new DefaultTerminalFactory().createTerminal();
+            screen = new TerminalScreen(terminal);
+            screen.getTerminalSize().withColumns(50);
+            screen.getTerminalSize().withRows(80);
+            screen.startScreen();
+
             byte[] receiveBuffer = new byte[2048];
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             Thread thread = new Thread(new ReceiveData(screen,receivePacket,clientSocket));
             thread.start();
-            clientSocket = new DatagramSocket();
-            Terminal terminal = new DefaultTerminalFactory().createTerminal();
-            screen = new TerminalScreen(terminal);
-
-            screen.startScreen();
-
-           Thread threadGUI = new Thread(new Visor(screen));
-            threadGUI.start();
-
-
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,7 +46,6 @@ public class Client {
             System.out.println("im here");
             keyStroke = screen.readInput();
             DatagramPacket datagramPacket;
-
 
             switch (keyStroke.getKeyType()) {
                 case ArrowUp:
@@ -81,17 +65,9 @@ public class Client {
                     clientSocket.send(datagramPacket);
                     break;
                 default:
-                    System.out.println("W8ting for Input motherfucker");
+                    System.out.println("W8iting for Input motherfucker");
                     break;
             }
         }
-
-
     }
-
-
-
-
-
-
 }

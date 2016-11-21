@@ -1,14 +1,10 @@
 package org.academiadecodigo.acarena.GameObjects;
 
-import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.Label;
-import org.academiadecodigo.acarena.GameObjects.Movable.Boss;
 import org.academiadecodigo.acarena.GameObjects.Movable.EmptySlut;
-import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
-import test.PlayerTest;
 
 import java.io.IOException;
 
@@ -38,21 +34,15 @@ public class GameObjectsFactory {
     }
 
 
-    // NOT RIGHT! Player is created with new Client!!!
+    // NOT RIGHT! ShittyPlayer is created with new Client!!!
     //    public void getNewPlayers(Field field) {
     //
-    //        Player player1 = new Player(PlayerNumber.ONE);
-    //        Player player2 = new Player(PlayerNumber.TWO);
+    //        ShittyPlayer player1 = new ShittyPlayer(PlayerNumber.ONE);
+    //        ShittyPlayer player2 = new ShittyPlayer(PlayerNumber.TWO);
     //
     //    }
 
     //This probably works but game logic is totally compromised with lanterna
-
-    private void createPlayers() {
-
-
-    }
-
 
     public void populateFieldWithWalls() {
 
@@ -65,18 +55,18 @@ public class GameObjectsFactory {
                     if (i == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
-                        System.out.println(i + "," + j );
+                        System.out.println(i + "," + j);
                         continue;
                     } else if (j == 0) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
-                        System.out.println(i + "," +j);
+                        System.out.println(i + "," + j);
                         continue;
                     } else if (j == rows - 1) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         continue;
-                    } else if (i == cols-1 ) {
+                    } else if (i == cols - 1) {
                         gameObjects[i][j] = new Wall(new LanternaFieldPosition(i, j, lanternaField));
                         labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         continue;
@@ -97,24 +87,32 @@ public class GameObjectsFactory {
     public void populateFieldWithFuckinWeapons() {
 
         int numberOfWeapons = (cols * rows) / WEAPON_ABUNDANCY;
-        int prob;
+        double prob;
 
         try {
-            for (int i = 1; i < rows - 1; i++) {
-                for (int j = 1; j < cols - 1; j++) {
+            for (int i = 1; i < cols - 1; i++) {
+                for (int j = 1; j < rows - 1; j++) {
 
-                    prob = (int) (Math.random() * 10);
+                    prob = (Math.random() * 130);
 
-                    if (prob > 5 && numberOfWeapons > 0) {
-                        gameObjects[j][i] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.BOW);
+                    if (prob > 0.08 && prob < 0.09 && numberOfWeapons > 0) {
+                        gameObjects[i][j] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.FLAMETRHOWER);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         numberOfWeapons--;
-                    } else if (prob > 2 && numberOfWeapons > 0) {
-                        gameObjects[j][i] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.AXE);
+                        System.out.println("FLAMETRHOWER in:" + i + "," + j);
+                    } else if (prob > 0.5 && prob < 0.8 && numberOfWeapons > 0) {
+                        gameObjects[i][j] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.AXE);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         numberOfWeapons--;
-                    } else if (prob > 0 && numberOfWeapons > 0) {
-                        gameObjects[j][i] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.AXE);
+                        System.out.println("AXE in:" + i + "," + j);
+                    } else if (prob > 0 && prob < 0.5 && numberOfWeapons > 0) {
+                        gameObjects[i][j] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.BOW);
+                        labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
                         numberOfWeapons--;
+                        System.out.println("BOW in:" + i + "," + j);
                     }
+
+
                 }
             }
         } catch (IOException e) {

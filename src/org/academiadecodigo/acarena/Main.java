@@ -1,10 +1,7 @@
 package org.academiadecodigo.acarena;
 
 
-import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.networking.server.Server;
-import org.academiadecodigo.acarena.networking.server.Server2nd;
-import test.PlayerTest;
 
 import java.io.IOException;
 
@@ -16,7 +13,7 @@ public class Main {
 
 //        LanternaField lanternaField = new LanternaField(10,10);
 //        lanternaField.init();
-//        PlayerTest playerTest = new PlayerTest(lanternaField);
+//        Player playerTest = new Player(lanternaField);
         Server server = new Server();
         Thread thread = new Thread(server);
         thread.start();

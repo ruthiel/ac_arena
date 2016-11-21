@@ -13,7 +13,7 @@ import org.academiadecodigo.acarena.Field;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.GameObjectsFactory;
 import org.academiadecodigo.acarena.position.FieldPosition;
-import test.PlayerTest;
+import org.academiadecodigo.acarena.GameObjects.Movable.Player;
 
 import java.io.IOException;
 
@@ -29,7 +29,7 @@ public class LanternaField implements Field, Runnable {
     private Label[][] labels;
     private MultiWindowTextGUI gui;
     private Panel panel;
-    private PlayerTest player;
+    private Player player;
 
     public LanternaField(int rows, int cols) throws IOException {
         this.rows = rows;
@@ -57,7 +57,7 @@ public class LanternaField implements Field, Runnable {
         return labels;
     }
 
-    public PlayerTest getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
@@ -108,16 +108,32 @@ public class LanternaField implements Field, Runnable {
 
     public void repaint(FieldPosition position) throws IOException {
 
-        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(),this);
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
+        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(), this);
+        for (int i = 1; i < cols -1; i++) {
+            for (int j = 1; j < rows -1; j++) {
                 if (labels[j][i].getPosition().getColumn() == position.getCol()
                         && labels[j][i].getPosition().getRow() == position.getRow()) {
 
-                    labels[j][i].setText("  ");
+                    labels[j][i].setText(" ");
                     labels[j][i].setBackgroundColor(TextColor.ANSI.RED);
                     getScreen().refresh();
-                    System.out.println("Pintar paredes");
+                    getGui().updateScreen();
+                }
+            }
+        }
+    }
+
+    public void removepaint(FieldPosition position) throws IOException {
+
+        position = new LanternaFieldPosition((position.getCol() * 2) + 1, position.getRow(), this);
+        for (int i = 1; i < cols -1; i++) {
+            for (int j = 1; j < rows -1; j++) {
+                if (labels[j][i].getPosition().getColumn() == position.getCol()
+                        && labels[j][i].getPosition().getRow() == position.getRow()) {
+
+                    labels[j][i].setText(" ");
+                    labels[j][i].setBackgroundColor(TextColor.ANSI.WHITE);
+                    getScreen().refresh();
                     getGui().updateScreen();
                 }
             }
