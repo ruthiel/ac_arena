@@ -13,12 +13,10 @@ public class Projectile implements Movable {
 
     private FieldPosition initPosition;
     private Direction direction;
-    private int damage;
-    private int range;
+
 
     public Projectile(WeaponType type, Player player) {
-        damage = type.getDamage();
-        range = type.getRange();
+
 //        initPosition = player.getPosition();
         direction = player.getDirection();
     }
@@ -26,12 +24,12 @@ public class Projectile implements Movable {
     @Override
     public void move(){
 
-        //Projectile moves in this.direction for this.range
-        try {
-            getInitPosition().moveInDirection(direction, range);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        //Projectile moves in this.direction for this.range
+//        try {
+//            getInitPosition().moveInDirection(direction, range);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
     public void hit(){
@@ -43,11 +41,11 @@ public class Projectile implements Movable {
 
     public Direction getDirection() {return direction;}
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getRange() {
-        return range;
-    }
+//    public int getDamage() {
+//        return damage;
+//    }
+//
+//    public int getRange() {
+//        return range;
+//    }
 }

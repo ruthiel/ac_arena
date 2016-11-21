@@ -1,6 +1,7 @@
 package org.academiadecodigo.acarena.GameObjects;
 
 import com.googlecode.lanterna.gui2.Label;
+import org.academiadecodigo.acarena.CollisionDetector;
 import org.academiadecodigo.acarena.GameObjects.Movable.EmptySlut;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
@@ -23,7 +24,7 @@ public class GameObjectsFactory {
     private int rows;
     private int middleCol = cols / 2;
     private int middleRow = rows / 2;
-    private final int WEAPON_ABUNDANCY = 160; //the higher the number, lesser the weapons
+    private final int WEAPON_ABUNDANCY = 100; //the higher the number, lesser the weapons
 
     public GameObjectsFactory(LanternaField lanternaField) {
         this.lanternaField = lanternaField;
@@ -31,16 +32,8 @@ public class GameObjectsFactory {
         rows = lanternaField.getRows();
         labels = lanternaField.getLabels();
         gameObjects = lanternaField.getGameObjects();
+        CollisionDetector.setObjects(gameObjects);
     }
-
-
-    // NOT RIGHT! ShittyPlayer is created with new Client!!!
-    //    public void getNewPlayers(Field field) {
-    //
-    //        ShittyPlayer player1 = new ShittyPlayer(PlayerNumber.ONE);
-    //        ShittyPlayer player2 = new ShittyPlayer(PlayerNumber.TWO);
-    //
-    //    }
 
     //This probably works but game logic is totally compromised with lanterna
 

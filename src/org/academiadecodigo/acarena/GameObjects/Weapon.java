@@ -24,4 +24,8 @@ public class Weapon extends GameObject {
     public void setUsed(boolean used) {
         this.used = used;
     }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
 }

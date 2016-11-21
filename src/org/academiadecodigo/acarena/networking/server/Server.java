@@ -43,7 +43,7 @@ public class Server implements Runnable {
             byte[] receiveBuffer = new byte[2048];
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
 
-            if (map.size() == 2 && gameOnline == false) {
+            if (map.size() == 1 && gameOnline == false) {
                 try {
                     game = new Game(map);
                 } catch (IOException e) {
