@@ -31,7 +31,7 @@ public class Game {
         Thread threadField = new Thread(lanternaField);
         threadField.start();
         playerTestMap = new HashMap<>();
-
+        CollisionDetector collisionDetector = new CollisionDetector(lanternaField.getGameObjects());
         for (String value : map.values()) {
 
             Player player = new Player(new LanternaFieldPosition(10, 10, lanternaField), lanternaField);
@@ -51,34 +51,34 @@ public class Game {
 
         switch (data) {
             case "u":
-                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.UP, 1);
                 lanternaField.repaint(player.getPosition());
+                CollisionDetector.getCollisionDetector().check(player);
                 System.out.println(player.getPosition());
                 break;
 
             case "d":
-                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.DOWN, 1);
                 lanternaField.repaint(player.getPosition());
+                CollisionDetector.getCollisionDetector().check(player);
                 System.out.println(player.getPosition());
                 break;
 
             case "l":
-                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.LEFT, 1);
                 lanternaField.repaint(player.getPosition());
+                CollisionDetector.getCollisionDetector().check(player);
                 System.out.println(player.getPosition());
                 break;
 
             case "r":
-                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.RIGHT, 1);
                 lanternaField.repaint(player.getPosition());
+                CollisionDetector.getCollisionDetector().check(player);
                 System.out.println(player.getPosition());
                 break;
 

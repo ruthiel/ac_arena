@@ -38,10 +38,9 @@ public class CollisionDetector {
 
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects[0].length; j++) {
-
-                if (objects[i][j].getPosition() == player.getPosition()) {
+                if (objects[i][j].getPosition().getCol()==player.getPosition().getCol() && objects[i][j].getPosition().getRow() == player.getPosition().getRow()&&  objects[i][j]instanceof Weapon){
+                   player.increasePoints((Weapon) objects[i][j]);
                     System.out.println("OI");
-                    player.increasePoints();
 
                 }
 //

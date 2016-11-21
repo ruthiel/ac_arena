@@ -135,7 +135,7 @@ public class Player extends GameObject {
         this.points = points;
     }
 
-    public void increasePoints() {
+    public void increasePoints(Weapon weapon) {
 
         int tmp = weapon.getWeaponType().getPoints();
         setPoints(points + tmp);
