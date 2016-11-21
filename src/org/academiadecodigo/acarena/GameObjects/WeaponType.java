@@ -7,9 +7,9 @@ import org.academiadecodigo.acarena.TextColor;
  */
 public enum WeaponType {
 
-    BOW (1, "1", TextColor.ANSI.CYAN),
-    AXE (2, "2", TextColor.ANSI.GREEN),
-    FLAMETRHOWER (2, "5", TextColor.ANSI.MAGENTA);
+    BOW(1, "1", TextColor.ANSI.CYAN),
+    AXE(2, "2", TextColor.ANSI.GREEN),
+    FLAMETRHOWER(2, "5", TextColor.ANSI.MAGENTA);
 
     private int points;
     private String name;
@@ -21,13 +21,6 @@ public enum WeaponType {
         this.name = name;
         this.textColor = textColor;
     }
-
-//    public int getRange() {
-//        return range;
-//    }
-//
-//    public int getDamage() { return damage; }
-
 
     public int getPoints() {
         return points;

@@ -42,23 +42,15 @@ public class Player extends GameObject {
         super(position);
         this.pos = position;
         this.lanternaField = lanternaField;
-
         setColor(TextColor.ANSI.BLUE);
         setName(" ");
-
         setHealth(HEALTH);
-
     }
 
     public void repaint() throws IOException {
         lanternaField.repaint(getPosition());
     }
 
-    //    public void run() throws IOException {
-//        KeyStroke keyStroke = null;
-//        while (true) {
-//            System.out.println("im here");
-//            keyStroke = lanternaField.getScreen().readInput();
     public void playerMove(KeyStroke keyStroke) throws IOException {
 
         switch (keyStroke.getKeyType()) {
@@ -101,7 +93,7 @@ public class Player extends GameObject {
     }
 
 
-    public void useWeapon(WeaponType weaponType){
+    public void useWeapon(WeaponType weaponType) {
 
         if (hasWeapon) {
             Projectile projectile = new Projectile(weaponType, this);
@@ -111,15 +103,19 @@ public class Player extends GameObject {
     }
 
 
-    public void setDead(boolean dead) {isDead = dead;}
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 
     public void getWeapon() {
         hasWeapon = true;
     }
 
-    public void dropWeapon() {hasWeapon = false; }
+    public void dropWeapon() {
+        hasWeapon = false;
+    }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         health -= damage;
     }
 
@@ -139,10 +135,10 @@ public class Player extends GameObject {
         this.points = points;
     }
 
-    public void increasePoints(){
+    public void increasePoints() {
 
         int tmp = weapon.getWeaponType().getPoints();
-        setPoints(points+tmp);
+        setPoints(points + tmp);
     }
 
     public int getPoints() {

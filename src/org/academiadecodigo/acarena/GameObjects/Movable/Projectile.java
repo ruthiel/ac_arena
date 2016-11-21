@@ -16,13 +16,11 @@ public class Projectile implements Movable {
 
 
     public Projectile(WeaponType type, Player player) {
-
-//        initPosition = player.getPosition();
         direction = player.getDirection();
     }
 
     @Override
-    public void move(){
+    public void move() {
 
 //        //Projectile moves in this.direction for this.range
 //        try {
@@ -32,20 +30,13 @@ public class Projectile implements Movable {
 //        }
 
     }
-    public void hit(){
 
-
+    public FieldPosition getInitPosition() {
+        return initPosition;
     }
 
-    public FieldPosition getInitPosition() {return initPosition;}
-
-    public Direction getDirection() {return direction;}
-
-//    public int getDamage() {
-//        return damage;
-//    }
-//
-//    public int getRange() {
-//        return range;
-//    }
+    public Direction getDirection() {
+        return direction;
+    }
 }
+
