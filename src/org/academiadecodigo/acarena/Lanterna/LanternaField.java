@@ -46,6 +46,7 @@ public class LanternaField implements Field, Runnable {
         factory.populateFieldWithFuckinWeapons();
 
 
+
     }
 
     public GameObject[][] getGameObjects() {

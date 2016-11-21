@@ -80,5 +80,10 @@ public class Game {
                 System.out.println("W8iting for Input motherfucker");
                 break;
         }
+
+    }
+
+    public LanternaField getLanternaField() {
+        return lanternaField;
     }
 }

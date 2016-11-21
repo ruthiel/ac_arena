@@ -1,5 +1,6 @@
 package org.academiadecodigo.acarena.networking.server;
 
+import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.input.KeyStroke;
 import org.academiadecodigo.acarena.Game;
 
@@ -53,7 +54,8 @@ public class Server implements Runnable {
                 e.printStackTrace();
             }
 
-            Iterator<GameClient> iterator = map.keySet().iterator();
+
+
 
             if (map.containsValue(String.valueOf(receivePacket.getAddress()))) {
                 System.out.println("Cliente existente");
@@ -78,17 +80,15 @@ public class Server implements Runnable {
                 map.put(client, ip);
                 System.out.println(map.size());
 
+                MultiWindowTextGUI gui = game.getLanternaField().getGui();
                 byte[] sendBuffer = new byte[2048];
-                DatagramPacket sendPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+
+                DatagramPacket sendPacket = new DatagramPacket(gui.toString().getBytes(), gui.toString().getBytes().length);
 
 
                 for (int i = 0; i < clientList.size(); i++) {
                     clientList.get(i).sendPacket(sendPacket);
                 }
-
-//            for (GameClient papaChuchas : clientList) {
-//                papaChuchas.sendPacket(receivePacket);
-//            }
 
                 if (map.size() == 1 && gameOnline == false) {
                     try {
