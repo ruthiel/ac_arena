@@ -34,6 +34,9 @@ public class Game {
         playerTestMap = new HashMap<>();
 
         for (String value : map.values()) {
+
+
+
             Player player = new Player(new LanternaFieldPosition(10, 10, lanternaField), lanternaField);
             playerTestMap.put(value, player);
             player.repaint();
@@ -42,7 +45,7 @@ public class Game {
         }
     }
 
-    public void movePlayer(String data, String ip) throws IOException {
+    synchronized public void movePlayer(String data, String ip) throws IOException {
 
         player = playerTestMap.get(ip);
         data = data.substring(0,1);

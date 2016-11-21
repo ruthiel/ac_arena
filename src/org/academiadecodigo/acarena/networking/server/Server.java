@@ -42,6 +42,17 @@ public class Server implements Runnable {
             System.out.println("----- Server open ------");
             byte[] receiveBuffer = new byte[2048];
             DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+
+            if (map.size() == 2 && gameOnline == false) {
+                try {
+                    game = new Game(map);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                gameOnline = true;
+            }
+
+
             try {
                 socket.receive(receivePacket);
                 String data = new String(receivePacket.getData());
@@ -86,19 +97,12 @@ public class Server implements Runnable {
                     clientList.get(i).sendPacket(sendPacket);
                 }
 
-                if (map.size() == 1 && gameOnline == false) {
-                    try {
-                        game = new Game(map);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    gameOnline = true;
-                }
+
             }
         }
     }
 
-    private void movePlayer(String data ,DatagramPacket datagramPacket) throws IOException, ClassNotFoundException {
+private void movePlayer (String data ,DatagramPacket datagramPacket) throws IOException, ClassNotFoundException {
         System.out.println("before sending the message");
         if(map.containsValue(String.valueOf(datagramPacket.getAddress()))){
             System.out.println("sending message");

@@ -94,7 +94,6 @@ public class GameObjectsFactory {
                 for (int j = 1; j < rows - 1; j++) {
 
                     prob = (Math.random() * 130);
-                    System.out.println(prob);
 
                     if (prob > 0.08 && prob < 0.09 && numberOfWeapons > 0) {
                         gameObjects[i][j] = new Weapon(new LanternaFieldPosition(i, j, lanternaField), WeaponType.FLAMETRHOWER);
