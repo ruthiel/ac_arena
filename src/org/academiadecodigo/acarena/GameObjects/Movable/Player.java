@@ -1,16 +1,9 @@
 package org.academiadecodigo.acarena.GameObjects.Movable;
 
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.Label;
-import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.input.*;
-import com.googlecode.lanterna.screen.AbstractScreen;
-import com.googlecode.lanterna.screen.Screen;
-import org.academiadecodigo.acarena.*;
 import org.academiadecodigo.acarena.Direction;
 import org.academiadecodigo.acarena.GameObjects.GameObject;
 import org.academiadecodigo.acarena.GameObjects.PlayerNumber;
@@ -21,8 +14,8 @@ import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
 import org.academiadecodigo.acarena.position.AbstractFieldPosition;
 import org.academiadecodigo.acarena.position.FieldPosition;
 
-import java.awt.*;
 import java.io.IOException;
+import java.io.ObjectInput;
 
 /**
  * Created by codecadet on 14/11/16.
@@ -41,29 +34,23 @@ public class Player extends GameObject {
     private boolean isDead;
     private boolean hasWeapon;
 
+    private int points;
+
     private final int HEALTH = 100;
 
     public Player(LanternaFieldPosition position, LanternaField lanternaField) throws IOException {
         super(position);
         this.pos = position;
         this.lanternaField = lanternaField;
-
         setColor(TextColor.ANSI.BLUE);
         setName(" ");
-
         setHealth(HEALTH);
-
     }
 
     public void repaint() throws IOException {
         lanternaField.repaint(getPosition());
     }
 
-    //    public void run() throws IOException {
-//        KeyStroke keyStroke = null;
-//        while (true) {
-//            System.out.println("im here");
-//            keyStroke = lanternaField.getScreen().readInput();
     public void playerMove(KeyStroke keyStroke) throws IOException {
 
         switch (keyStroke.getKeyType()) {
@@ -106,7 +93,7 @@ public class Player extends GameObject {
     }
 
 
-    public void useWeapon(WeaponType weaponType){
+    public void useWeapon(WeaponType weaponType) {
 
         if (hasWeapon) {
             Projectile projectile = new Projectile(weaponType, this);
@@ -116,15 +103,19 @@ public class Player extends GameObject {
     }
 
 
-    public void setDead(boolean dead) {isDead = dead;}
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 
     public void getWeapon() {
         hasWeapon = true;
     }
 
-    public void dropWeapon() {hasWeapon = false; }
+    public void dropWeapon() {
+        hasWeapon = false;
+    }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         health -= damage;
     }
 
@@ -140,7 +131,19 @@ public class Player extends GameObject {
         return direction;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
+    public void increasePoints() {
+
+        int tmp = weapon.getWeaponType().getPoints();
+        setPoints(points + tmp);
+    }
+
+    public int getPoints() {
+        return points;
+    }
 
 }
 

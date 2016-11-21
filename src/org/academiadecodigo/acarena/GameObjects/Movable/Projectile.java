@@ -13,41 +13,30 @@ public class Projectile implements Movable {
 
     private FieldPosition initPosition;
     private Direction direction;
-    private int damage;
-    private int range;
+
 
     public Projectile(WeaponType type, Player player) {
-        damage = type.getDamage();
-        range = type.getRange();
-//        initPosition = player.getPosition();
         direction = player.getDirection();
     }
 
     @Override
-    public void move(){
+    public void move() {
 
-        //Projectile moves in this.direction for this.range
-        try {
-            getInitPosition().moveInDirection(direction, range);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    public void hit(){
-
+//        //Projectile moves in this.direction for this.range
+//        try {
+//            getInitPosition().moveInDirection(direction, range);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
-    public FieldPosition getInitPosition() {return initPosition;}
-
-    public Direction getDirection() {return direction;}
-
-    public int getDamage() {
-        return damage;
+    public FieldPosition getInitPosition() {
+        return initPosition;
     }
 
-    public int getRange() {
-        return range;
+    public Direction getDirection() {
+        return direction;
     }
 }
+

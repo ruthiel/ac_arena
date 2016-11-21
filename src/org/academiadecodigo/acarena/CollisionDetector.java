@@ -11,17 +11,20 @@ import org.academiadecodigo.acarena.position.AbstractFieldPosition;
  */
 public class CollisionDetector {
 
-    private static GameObject[] objects;
+    private static GameObject[][] objects;
 
-    public CollisionDetector(GameObject[] objects) {
+    public CollisionDetector(GameObject[][] objects) {
         this.objects = objects;
     }
 
     public boolean hasCollided(AbstractFieldPosition position) {
 
-        for (GameObject object : objects) {
-            if (object.getPosition() != position && object.getPosition().equals(position)) {
-                return true;
+
+        for (int i = 0; i < objects.length; i++) {
+            for (int j = 0; j < objects[0].length; j++) {
+                if (objects[i][j].getPosition() != position && objects[i][j].getPosition().equals(position)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -33,44 +36,48 @@ public class CollisionDetector {
 
     public void check(Player player) {
 
-        for (GameObject ob : objects) {
+        for (int i = 0; i < objects.length; i++) {
+            for (int j = 0; j < objects[0].length; j++) {
 
-            if (ob == player) {
-                continue;
+                if (objects[i][j].getPosition() == player.getPosition()) {
+                    System.out.println("OI");
+                    player.increasePoints();
+
+                }
+//
+//                if (objects[i][j].getPosition().equals(player.getPosition()) && objects[i][j] instanceof Weapon) {
+//
+//                }
+
             }
-
-            if (ob.getPosition().equals(player.getPosition())) {
-               // player.collision();
-            }
-
         }
     }
 
-    public boolean checkCollision(Direction direction, GameObject object) {
-
-        FieldPosition tempPosition = adjacentPosition(direction, object);
-
-        if (object instanceof Player) {
-
-            for (int i = 0; i < objects.length; i++) {
-                if (!objects[i].getPosition().equals(tempPosition)) {
-                    continue;
-                }
-                if (!(objects[i] instanceof Weapon)) {
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            for (int i = 0; i < objects.length; i++) {
-                if (!objects[i].getPosition().equals(tempPosition)) {
-                    continue;
-                }
-                return true;
-            }
-            return false;
-        }
-    }
+//    public boolean checkCollision(Direction direction, GameObject object) {
+//
+//        FieldPosition tempPosition = adjacentPosition(direction, object);
+//
+//        if (object instanceof Player) {
+//
+//            for (int i = 0; i < objects.length; i++) {
+//                if (!objects[i][].getPosition().equals(tempPosition)) {
+//                    continue;
+//                }
+//                if (!(objects[i] instanceof Weapon)) {
+//                    return true;
+//                }
+//            }
+//            return false;
+//        } else {
+//            for (int i = 0; i < objects.length; i++) {
+//                if (!objects[i].getPosition().equals(tempPosition)) {
+//                    continue;
+//                }
+//                return true;
+//            }
+//            return false;
+//        }
+//    }
 
     private FieldPosition adjacentPosition(Direction direction, GameObject object) {
 
@@ -103,4 +110,7 @@ public class CollisionDetector {
     }
 
 
+    public static void setObjects(GameObject[][] objects) {
+        CollisionDetector.objects = objects;
+    }
 }

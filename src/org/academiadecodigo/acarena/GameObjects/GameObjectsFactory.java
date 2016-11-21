@@ -1,6 +1,7 @@
 package org.academiadecodigo.acarena.GameObjects;
 
 import com.googlecode.lanterna.gui2.Label;
+import org.academiadecodigo.acarena.CollisionDetector;
 import org.academiadecodigo.acarena.GameObjects.Movable.EmptySlut;
 import org.academiadecodigo.acarena.Lanterna.LanternaField;
 import org.academiadecodigo.acarena.Lanterna.LanternaFieldPosition;
@@ -13,7 +14,6 @@ import java.io.IOException;
  */
 public class GameObjectsFactory {
 
-
     private FieldPosition position;
     private GameObject[][] gameObjects;
     private Label[][] labels;
@@ -23,7 +23,7 @@ public class GameObjectsFactory {
     private int rows;
     private int middleCol = cols / 2;
     private int middleRow = rows / 2;
-    private final int WEAPON_ABUNDANCY = 160; //the higher the number, lesser the weapons
+    private final int WEAPON_ABUNDANCY = 100; //the higher the number, lesser the weapons
 
     public GameObjectsFactory(LanternaField lanternaField) {
         this.lanternaField = lanternaField;
@@ -31,18 +31,8 @@ public class GameObjectsFactory {
         rows = lanternaField.getRows();
         labels = lanternaField.getLabels();
         gameObjects = lanternaField.getGameObjects();
+        CollisionDetector.setObjects(gameObjects);
     }
-
-
-    // NOT RIGHT! ShittyPlayer is created with new Client!!!
-    //    public void getNewPlayers(Field field) {
-    //
-    //        ShittyPlayer player1 = new ShittyPlayer(PlayerNumber.ONE);
-    //        ShittyPlayer player2 = new ShittyPlayer(PlayerNumber.TWO);
-    //
-    //    }
-
-    //This probably works but game logic is totally compromised with lanterna
 
     public void populateFieldWithWalls() {
 
@@ -74,8 +64,6 @@ public class GameObjectsFactory {
 
                     gameObjects[i][j] = new EmptySlut(new LanternaFieldPosition(i, j, lanternaField));
                     labels[i][j] = new Label(gameObjects[i][j].getName()).setBackgroundColor(gameObjects[i][j].getColor());
-
-
                 }
             }
         } catch (IOException e) {
@@ -85,7 +73,6 @@ public class GameObjectsFactory {
 
 
     public void populateFieldWithFuckinWeapons() {
-
         int numberOfWeapons = (cols * rows) / WEAPON_ABUNDANCY;
         double prob;
 
@@ -111,24 +98,12 @@ public class GameObjectsFactory {
                         numberOfWeapons--;
                         System.out.println("BOW in:" + i + "," + j);
                     }
-
-
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-//    private void createBoss(){
-//
-//        try{
-//        gameObjects[middleRow+1][middleCol+1] = new Boss(new LanternaFieldPosition(middleCol+1, middleRow+1, lanternaField));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
     private void placeFlag() {
 
@@ -137,7 +112,6 @@ public class GameObjectsFactory {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void setLanternaField(LanternaField lanternaField) {

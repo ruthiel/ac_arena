@@ -15,8 +15,6 @@ import java.io.IOException;
  */
 abstract public class GameObject {
 
-
-    //This class needs a FieldPosition, a Field and a CollisionDetector
     private FieldPosition position;
     private Field field;
     protected CollisionDetector collisionDetector;
@@ -41,14 +39,13 @@ abstract public class GameObject {
         this.collisionDetector = collisionDetector;
     }
 
-    public void move(Direction direction, int moves){
+    public void move(Direction direction, int moves) {
 
         try {
             getPosition().moveInDirection(direction, moves);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public TextCharacter getChar() {

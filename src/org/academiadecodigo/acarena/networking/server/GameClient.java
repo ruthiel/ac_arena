@@ -36,4 +36,13 @@ public class GameClient implements Runnable {
             e.printStackTrace();
         }
     }
+
+    public int getPort() {
+        return port;
+    }
+
+    public InetAddress getAddress() {
+
+        return address;
+    }
 }

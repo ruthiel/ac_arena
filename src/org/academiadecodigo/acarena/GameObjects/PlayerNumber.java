@@ -9,36 +9,35 @@ import org.academiadecodigo.acarena.position.FieldPosition;
  */
 public enum PlayerNumber {
 
-    ONE (TextColor.BLUE),
-    TWO (TextColor.RED),
-    THREE (TextColor.GREEN),
-    FOUR (TextColor.YELLOW);
+    ONE(TextColor.BLUE),
+    TWO(TextColor.RED),
+    THREE(TextColor.GREEN),
+    FOUR(TextColor.YELLOW);
 
     private TextColor color;
     private LanternaFieldPosition position;
 
-    PlayerNumber(TextColor color){
+    PlayerNumber(TextColor color) {
         this.position = setPosition();
         this.color = color;
     }
 
-    public LanternaFieldPosition setPosition(){
+    public LanternaFieldPosition setPosition() {
 
         switch (this) {
             case ONE:
-                position.setPos(1,1);
+                position.setPos(1, 1);
                 break;
             case TWO:
-                position.setPos(47,1);
+                position.setPos(47, 1);
                 break;
             case THREE:
-                position.setPos(3,0);
+                position.setPos(3, 0);
                 break;
             case FOUR:
-                position.setPos(4,0);
+                position.setPos(4, 0);
                 break;
         }
-
         return position;
     }
 

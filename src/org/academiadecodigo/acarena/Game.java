@@ -25,7 +25,6 @@ public class Game {
     private LanternaFieldPosition lanternaFieldPosition;
     private Player player;
 
-
     public Game(Map<GameClient, String> map) throws IOException {
 
         lanternaField = new LanternaField(50, 50);
@@ -34,8 +33,6 @@ public class Game {
         playerTestMap = new HashMap<>();
 
         for (String value : map.values()) {
-
-
 
             Player player = new Player(new LanternaFieldPosition(10, 10, lanternaField), lanternaField);
             playerTestMap.put(value, player);
@@ -50,9 +47,11 @@ public class Game {
         player = playerTestMap.get(ip);
         data = data.substring(0,1);
         System.out.println("the data is: " + data);
+        System.out.println("Player Points: " + player.getPoints());
 
         switch (data) {
             case "u":
+                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.UP, 1);
                 lanternaField.repaint(player.getPosition());
@@ -60,6 +59,7 @@ public class Game {
                 break;
 
             case "d":
+                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.DOWN, 1);
                 lanternaField.repaint(player.getPosition());
@@ -67,13 +67,15 @@ public class Game {
                 break;
 
             case "l":
+                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.LEFT, 1);
-                lanternaField.repaint(player.getPosition());;
+                lanternaField.repaint(player.getPosition());
                 System.out.println(player.getPosition());
                 break;
 
             case "r":
+                CollisionDetector.getCollisionDetector().check(player);
                 lanternaField.removepaint(player.getPosition());
                 player.getPosition().moveInDirection(Direction.RIGHT, 1);
                 lanternaField.repaint(player.getPosition());
@@ -84,10 +86,6 @@ public class Game {
                 System.out.println("W8iting for Input motherfucker");
                 break;
         }
-
-    }
-
-    public LanternaField getLanternaField() {
-        return lanternaField;
+        CollisionDetector.getCollisionDetector().check(player);
     }
 }
