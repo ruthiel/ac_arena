@@ -19,7 +19,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         int portServer = 5000;
-        String ipServer = "localhost";
+        String ipServer = "192.168.1.21";
 
         DatagramSocket clientSocket = new DatagramSocket();
 

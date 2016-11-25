@@ -107,11 +107,6 @@ public class GameObjectsFactory {
 
     private void placeFlag() {
 
-        try {
-            gameObjects[middleRow][middleCol] = new Flag(new LanternaFieldPosition(middleCol, middleRow, lanternaField));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setLanternaField(LanternaField lanternaField) {
